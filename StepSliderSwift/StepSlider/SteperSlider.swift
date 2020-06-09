@@ -229,7 +229,7 @@ extension StepSlider {
             .cgImage
     }
     
-    func setTrackCircleImage(_ image:UIImage ,forState state: UIControl.Event)
+    func _setTrackCircleImage(image:UIImage ,forState state: UIControl.Event)
     {
         _trackCircleImages[state.rawValue] = image
         self.setNeedsLayout()
@@ -413,10 +413,53 @@ extension StepSlider {
         }
         _trackLabelsArray.removeAll(keepingCapacity: true)
     }
-
+    
     
     func roundForTextDrawing(_ value: CGFloat) -> CGFloat
     {
         return floor(value * UIScreen.main.scale) / UIScreen.main.scale
     }
+}
+
+// MARK: - Access methods
+extension StepSlider {
+    
+    
+    
+    func _setIndex(index:Int, animated:Bool)
+    {
+        animateLayouts = animated
+        self.index = index
+    }
+    public override var tintColor: UIColor! {
+        didSet {
+            self.setNeedsLayout()
+        }
+    }
+    
+    func setLabels(labels: Array<String> )
+    {
+        assert(labels.count != 1, "Labels count can not be equal to 1!")
+        if (self.labels != labels) {
+            self.labels = labels
+            
+            if (self.labels.count > 0) {
+                maxCount = UInt(labels.count);
+            }
+            
+            self.updateIndex()
+            self.removeLabelLayers()
+            self.setNeedsLayout()
+        }
+    }
+    
+    func setMaxCount(_ maxCount:UInt) {
+        
+        if (self.maxCount != maxCount && self.labels.count != 0) {
+            self.maxCount = maxCount;
+            self.updateIndex()
+            self.setNeedsLayout()
+        }
+    }
+    
 }

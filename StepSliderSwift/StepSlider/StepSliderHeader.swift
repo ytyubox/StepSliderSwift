@@ -117,7 +117,7 @@ public class StepSlider:UIControl {
      *  @param animated `YES` to animate changing of the `index` property.
      */
     public func setIndex(index: Int, animated: Bool)  {
-        
+        _setIndex(index:index, animated: animated)
     }
     
     //    internal
@@ -130,7 +130,7 @@ public class StepSlider:UIControl {
      *  @param state The state that uses the specified image.
      */
     func setTrackCircleImage(image:UIImage, for state : UIControl.State) {
-        
+        setTrackCircleImage(image: image, for: state)
     }
     //    struct _State {
     var _trackLayer: CAShapeLayer = CAShapeLayer()
