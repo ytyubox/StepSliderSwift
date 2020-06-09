@@ -53,7 +53,7 @@ public class StepSlider:UIControl {
      */
     //(nonatomic, getter=isDotsInteractionEnabled)
     @IBInspectable public var  dotsInteractionEnabled: Bool = true
-    
+    public var isDotsInteractionEnabled:Bool {dotsInteractionEnabled}
     
     /**
      *  Color of the slider slider.

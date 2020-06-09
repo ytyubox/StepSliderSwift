@@ -216,14 +216,14 @@ extension StepSlider {
             : self.trackColor.cgColor
     }
     
-    func trackCircleImage(_ trackCircle:CAShapeLayer) -> CGImage
+    func trackCircleImage(_ trackCircle:CAShapeLayer) -> CGImage?
     {
         return trackCircleImageForState(
             self.trackCircleIsSeleceted(trackCircle)
                 ? .selected//UIControlStateSelected
                 : .normal
-            )
-            .cgImage!
+        )
+            .cgImage
     }
     
     func setTrackCircleImage(_ image:UIImage ,forState state: UIControl.Event)
@@ -237,4 +237,126 @@ extension StepSlider {
         return _trackCircleImages[state.rawValue] ?? _trackCircleImages[State.normal.rawValue]!
     }
     
+}
+
+
+// MARK: - Touches
+
+extension StepSlider {
+    
+    
+    
+    public override func gestureRecognizerShouldBegin(_ gestureRecognizer:UIGestureRecognizer) -> Bool
+    {
+        guard gestureRecognizer is UIPanGestureRecognizer else  {
+            return false
+        }
+        let  position:CGPoint = gestureRecognizer.location(in: self)
+        return !self.bounds.contains(position);
+        
+        
+    }
+    public override func beginTracking(_ touch: UITouch, with event: UIEvent?) -> Bool {
+        
+        
+        startTouchPosition = touch.location(in: self)
+        startSliderPosition = _sliderCircleLayer.position;
+        
+        if (self.enableHapticFeedback && !ProcessInfo.processInfo.isLowPowerModeEnabled) {
+            _selectFeedback = UIImpactFeedbackGenerator()
+        }
+        
+        _selectFeedback?.prepare()
+        if (_sliderCircleLayer.frame.contains(startTouchPosition)) {
+            return true
+        } else if (self.isDotsInteractionEnabled) {
+            for i in 0 ..< _trackCirclesArray.count {
+                let dot:CALayer = _trackCirclesArray[i];
+                
+                let dotRadiusDiff:CGFloat = 22 - self.trackCircleRadius
+                let frameToCheck:CGRect = dotRadiusDiff > 0
+                    ? dot.frame.insetBy(dx: -dotRadiusDiff, dy: -dotRadiusDiff)
+                    : dot.frame
+                
+                if (frameToCheck.contains(startTouchPosition)) {
+                    let  oldIndex: UInt = UInt(index);
+                    
+                    index = i;
+                    
+                    if (oldIndex != index) {
+                        self.sendActions(for: .valueChanged)
+                        _selectFeedback!.impactOccurred()
+                        _selectFeedback!.prepare()
+                    }
+                    animateLayouts = true;
+                    self.setNeedsLayout()
+                    return false
+                }
+            }
+            return false
+        }
+        return false
+    }
+    public override func continueTracking(_ touch: UITouch, with event: UIEvent?) -> Bool {
+        
+        let position:CGFloat = startSliderPosition.x - (startTouchPosition.x - touch.location(in: self).x);
+        let limitedPosition:CGFloat = fmin(fmax(maxRadius, position), self.bounds.size.width - maxRadius);
+        
+        withoutCAAnimation{
+            self._sliderCircleLayer.position = CGPoint(
+                x: limitedPosition,
+                y: self._sliderCircleLayer.position.y);
+            self._trackLayer.path = self.fillingPath()
+            
+            let index = Int((self.sliderPosition() + self.diff) / (self._trackLayer.bounds.size.width / CGFloat(self.maxCount - 1)))
+            if (self.index != index) {
+                for trackCircle in self._trackCirclesArray {
+                    let  trackCircleImage:CGImage? = self.trackCircleImage(trackCircle)
+                    
+                    if let trackCircleImage = trackCircleImage {
+                        trackCircle.contents = trackCircleImage
+                    } else {
+                        trackCircle.fillColor = self.trackCircleColor(trackCircle)
+                    }
+                }
+                self.index = index;
+                self.sendActions(for: .valueChanged)
+                self._selectFeedback?.impactOccurred()
+                self._selectFeedback?.prepare()
+            }
+        }
+        
+        return true
+    }
+    
+    public override func endTracking(_ touch: UITouch?, with event: UIEvent?) {
+        self.endTouches()
+    }
+    public override func cancelTracking(with event: UIEvent?) {
+        self.endTouches()
+    }
+
+    func endTouches()
+    {
+        let newIndex = Int(round(self.indexCalculate()))
+        
+        if (newIndex != index) {
+            index = Int(newIndex);
+            self.sendActions(for: .valueChanged)
+        }
+        
+        animateLayouts = true
+        self.setNeedsLayout()
+        _selectFeedback = nil
+    }
+    
+}
+
+
+private func withoutCAAnimation(code: () ->Void)
+{
+    CATransaction.begin()
+    CATransaction.setValue( kCFBooleanTrue, forKey: kCATransactionDisableActions)
+    code();
+    CATransaction.commit()
 }
