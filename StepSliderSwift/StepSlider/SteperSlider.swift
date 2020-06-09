@@ -161,10 +161,10 @@ extension StepSlider {
     //    /*
     //     Calculate distance from trackCircle center to point where circle cross track line.
     //     */
-    //    - (void)updateDiff
-    //    {
-    //        diff = sqrtf(fmaxf(0.f, powf(self.trackCircleRadius, 2.f) - pow(self.trackHeight / 2.f, 2.f)));
-    //    }
+         func updateDiff()
+        {
+            diff = sqrt(fmax(0.0, pow(self.trackCircleRadius, 2.0) - pow(self.trackHeight / 2.0, 2.0)));
+        }
     //
     //    - (void)updateMaxRadius
     //    {
