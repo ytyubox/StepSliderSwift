@@ -137,7 +137,7 @@ public class StepSlider:UIControl {
     var _sliderCircleLayer: CAShapeLayer = CAShapeLayer()
     var _trackCirclesArray: Array<CAShapeLayer> = []
     var _trackLabelsArray: Array<CATextLayer> = []
-    var _trackCircleImages: Dictionary <Int, UIImage> = [:]
+    var _trackCircleImages: Dictionary <UInt, UIImage> = [:]
     var _selectFeedback: UIImpactFeedbackGenerator?
     var animateLayouts: Bool = true
     var maxRadius: CGFloat = 0

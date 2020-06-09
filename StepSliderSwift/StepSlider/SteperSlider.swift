@@ -157,50 +157,84 @@ extension StepSlider {
     //    /*
     //     Calculate distance from trackCircle center to point where circle cross track line.
     //     */
-         func updateDiff()
-        {
-            diff = sqrt(fmax(0.0, pow(self.trackCircleRadius, 2.0) - pow(self.trackHeight / 2.0, 2.0)));
-        }
+    func updateDiff()
+    {
+        diff = sqrt(fmax(0.0, pow(self.trackCircleRadius, 2.0) - pow(self.trackHeight / 2.0, 2.0)));
+    }
     
-        func updateMaxRadius()
-        {
-            maxRadius = fmax(self.trackCircleRadius, self.sliderCircleRadius);
-        }
+    func updateMaxRadius()
+    {
+        maxRadius = fmax(self.trackCircleRadius, self.sliderCircleRadius);
+    }
     
-        func updateIndex()
-        {
-            assert(self.maxCount > 1, "Elements count must be greater than 1!")
-            if (index > (self.maxCount - 1)) {
-                index = Int(self.maxCount - 1);
-                self.sendActions(for: .valueChanged)
-            }
+    func updateIndex()
+    {
+        assert(self.maxCount > 1, "Elements count must be greater than 1!")
+        if (index > (self.maxCount - 1)) {
+            index = Int(self.maxCount - 1);
+            self.sendActions(for: .valueChanged)
         }
+    }
     //
     func fillingPath() -> CGPath
-        {
-            var fillRect:  CGRect     = _trackLayer.bounds;
-            fillRect.size.width = self.sliderPosition()
+    {
+        var fillRect:  CGRect     = _trackLayer.bounds;
+        fillRect.size.width = self.sliderPosition()
+        
+        return UIBezierPath(rect: fillRect).cgPath
+    }
     
-            return UIBezierPath(rect: fillRect).cgPath
-        }
-    
-        func sliderPosition() -> CGFloat
-        {
-            return _sliderCircleLayer.position.x - maxRadius;
-        }
+    func sliderPosition() -> CGFloat
+    {
+        return _sliderCircleLayer.position.x - maxRadius;
+    }
     
     func trackCirclePosition(_ trackCircle:CAShapeLayer) -> CGFloat
-        {
-            return trackCircle.position.x - maxRadius;
-        }
+    {
+        return trackCircle.position.x - maxRadius;
+    }
     
-        func indexCalculate() -> CGFloat
-        {
-            return self.sliderPosition() / (_trackLayer.bounds.size.width / CGFloat(self.maxCount - 1));
-        }
+    func indexCalculate() -> CGFloat
+    {
+        return self.sliderPosition() / (_trackLayer.bounds.size.width / CGFloat(self.maxCount - 1));
+    }
     
-    func trackCircleIsSeleceted(trackCircle:CAShapeLayer) -> Bool
-        {
-            return self.sliderPosition() + diff >= self.trackCirclePosition(trackCircle)
-        }
+    func trackCircleIsSeleceted(_ trackCircle:CAShapeLayer) -> Bool
+    {
+        return self.sliderPosition() + diff >= self.trackCirclePosition(trackCircle)
+    }
+}
+
+// MARK: - Track circle
+extension StepSlider {
+    
+    
+    func trackCircleColor(_ trackCircle:CAShapeLayer) -> CGColor
+    {
+        return self.trackCircleIsSeleceted(trackCircle)
+            ? self.tintColor.cgColor
+            : self.trackColor.cgColor
+    }
+    
+    func trackCircleImage(_ trackCircle:CAShapeLayer) -> CGImage
+    {
+        return trackCircleImageForState(
+            self.trackCircleIsSeleceted(trackCircle)
+                ? .selected//UIControlStateSelected
+                : .normal
+            )
+            .cgImage!
+    }
+    
+    func setTrackCircleImage(_ image:UIImage ,forState state: UIControl.Event)
+    {
+        _trackCircleImages[state.rawValue] = image;
+        self.setNeedsLayout()
+    }
+    
+    func trackCircleImageForState(_ state:UIControl.State) -> UIImage
+    {
+        return _trackCircleImages[state.rawValue] ?? _trackCircleImages[State.normal.rawValue]!
+    }
+    
 }
