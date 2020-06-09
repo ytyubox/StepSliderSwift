@@ -8,6 +8,14 @@
 
 import UIKit
 import QuartzCore
+private func withoutCAAnimation(code: () ->Void)
+{
+    CATransaction.begin()
+    CATransaction.setValue( kCFBooleanTrue, forKey: kCATransactionDisableActions)
+    code()
+    CATransaction.commit()
+}
+
 internal
 extension StepSlider {
     func addLayers()
@@ -100,11 +108,11 @@ extension StepSlider {
         let basicTrackCircleAnimation = CABasicAnimation(keyPath: StepSlider.kTrackAnimation)
         
         basicTrackCircleAnimation.fillMode  = .backwards
-        basicTrackCircleAnimation.beginTime = CACurrentMediaTime() + beginTime;
+        basicTrackCircleAnimation.beginTime = CACurrentMediaTime() + beginTime
         basicTrackCircleAnimation.duration  = CATransaction.animationDuration() * duration
-        basicTrackCircleAnimation.keyPath   = keyPath;
-        basicTrackCircleAnimation.fromValue = fromValue;
-        basicTrackCircleAnimation.toValue   = toValue;
+        basicTrackCircleAnimation.keyPath   = keyPath
+        basicTrackCircleAnimation.fromValue = fromValue
+        basicTrackCircleAnimation.toValue   = toValue
         
         trackCircle.add(basicTrackCircleAnimation, forKey: Self.kTrackAnimation)
         trackCircle.setValue(basicTrackCircleAnimation.toValue, forKey: basicTrackCircleAnimation.keyPath!)
@@ -122,7 +130,7 @@ extension StepSlider {
             return Array(layers[0..<Int(self.maxCount)])
         }
         
-        return layers;
+        return layers
     }
     
     func labelHeightWithMaxWidth(_ maxWidth:CGFloat) -> CGFloat {
@@ -134,9 +142,9 @@ extension StepSlider {
                 var size: CGSize
                 if (self.adjustLabel && (i == 0 || i == self.labels.count - 1)) {
                     size = CGSize(width: self.roundForTextDrawing(maxWidth) / 2 + maxRadius,
-                                  height: CGFloat.greatestFiniteMagnitude);
+                                  height: CGFloat.greatestFiniteMagnitude)
                 } else {
-                    size = CGSize(width: self.roundForTextDrawing(maxWidth), height: CGFloat.greatestFiniteMagnitude);
+                    size = CGSize(width: self.roundForTextDrawing(maxWidth), height: CGFloat.greatestFiniteMagnitude)
                 }
                 
                 let height:CGFloat =
@@ -146,12 +154,12 @@ extension StepSlider {
                         attributes:[NSAttributedString.Key.font : self.labelFont],
                         context:nil)
                         .size.height
-                labelHeight = fmax(ceil(height), labelHeight);
+                labelHeight = fmax(ceil(height), labelHeight)
             }
-            return labelHeight;
+            return labelHeight
         }
         
-        return 0;
+        return 0
     }
     //
     //    /*
@@ -159,26 +167,26 @@ extension StepSlider {
     //     */
     func updateDiff()
     {
-        diff = sqrt(fmax(0.0, pow(self.trackCircleRadius, 2.0) - pow(self.trackHeight / 2.0, 2.0)));
+        diff = sqrt(fmax(0.0, pow(self.trackCircleRadius, 2.0) - pow(self.trackHeight / 2.0, 2.0)))
     }
     
     func updateMaxRadius()
     {
-        maxRadius = fmax(self.trackCircleRadius, self.sliderCircleRadius);
+        maxRadius = fmax(self.trackCircleRadius, self.sliderCircleRadius)
     }
     
     func updateIndex()
     {
         assert(self.maxCount > 1, "Elements count must be greater than 1!")
         if (index > (self.maxCount - 1)) {
-            index = Int(self.maxCount - 1);
+            index = Int(self.maxCount - 1)
             self.sendActions(for: .valueChanged)
         }
     }
     //
     func fillingPath() -> CGPath
     {
-        var fillRect:  CGRect     = _trackLayer.bounds;
+        var fillRect:  CGRect     = _trackLayer.bounds
         fillRect.size.width = self.sliderPosition()
         
         return UIBezierPath(rect: fillRect).cgPath
@@ -186,17 +194,17 @@ extension StepSlider {
     
     func sliderPosition() -> CGFloat
     {
-        return _sliderCircleLayer.position.x - maxRadius;
+        return _sliderCircleLayer.position.x - maxRadius
     }
     
     func trackCirclePosition(_ trackCircle:CAShapeLayer) -> CGFloat
     {
-        return trackCircle.position.x - maxRadius;
+        return trackCircle.position.x - maxRadius
     }
     
     func indexCalculate() -> CGFloat
     {
-        return self.sliderPosition() / (_trackLayer.bounds.size.width / CGFloat(self.maxCount - 1));
+        return self.sliderPosition() / (_trackLayer.bounds.size.width / CGFloat(self.maxCount - 1))
     }
     
     func trackCircleIsSeleceted(_ trackCircle:CAShapeLayer) -> Bool
@@ -228,7 +236,7 @@ extension StepSlider {
     
     func setTrackCircleImage(_ image:UIImage ,forState state: UIControl.Event)
     {
-        _trackCircleImages[state.rawValue] = image;
+        _trackCircleImages[state.rawValue] = image
         self.setNeedsLayout()
     }
     
@@ -252,7 +260,7 @@ extension StepSlider {
             return false
         }
         let  position:CGPoint = gestureRecognizer.location(in: self)
-        return !self.bounds.contains(position);
+        return !self.bounds.contains(position)
         
         
     }
@@ -260,7 +268,7 @@ extension StepSlider {
         
         
         startTouchPosition = touch.location(in: self)
-        startSliderPosition = _sliderCircleLayer.position;
+        startSliderPosition = _sliderCircleLayer.position
         
         if (self.enableHapticFeedback && !ProcessInfo.processInfo.isLowPowerModeEnabled) {
             _selectFeedback = UIImpactFeedbackGenerator()
@@ -271,7 +279,7 @@ extension StepSlider {
             return true
         } else if (self.isDotsInteractionEnabled) {
             for i in 0 ..< _trackCirclesArray.count {
-                let dot:CALayer = _trackCirclesArray[i];
+                let dot:CALayer = _trackCirclesArray[i]
                 
                 let dotRadiusDiff:CGFloat = 22 - self.trackCircleRadius
                 let frameToCheck:CGRect = dotRadiusDiff > 0
@@ -279,16 +287,16 @@ extension StepSlider {
                     : dot.frame
                 
                 if (frameToCheck.contains(startTouchPosition)) {
-                    let  oldIndex: UInt = UInt(index);
+                    let  oldIndex: UInt = UInt(index)
                     
-                    index = i;
+                    index = i
                     
                     if (oldIndex != index) {
                         self.sendActions(for: .valueChanged)
                         _selectFeedback!.impactOccurred()
                         _selectFeedback!.prepare()
                     }
-                    animateLayouts = true;
+                    animateLayouts = true
                     self.setNeedsLayout()
                     return false
                 }
@@ -299,13 +307,13 @@ extension StepSlider {
     }
     public override func continueTracking(_ touch: UITouch, with event: UIEvent?) -> Bool {
         
-        let position:CGFloat = startSliderPosition.x - (startTouchPosition.x - touch.location(in: self).x);
-        let limitedPosition:CGFloat = fmin(fmax(maxRadius, position), self.bounds.size.width - maxRadius);
+        let position:CGFloat = startSliderPosition.x - (startTouchPosition.x - touch.location(in: self).x)
+        let limitedPosition:CGFloat = fmin(fmax(maxRadius, position), self.bounds.size.width - maxRadius)
         
         withoutCAAnimation{
             self._sliderCircleLayer.position = CGPoint(
                 x: limitedPosition,
-                y: self._sliderCircleLayer.position.y);
+                y: self._sliderCircleLayer.position.y)
             self._trackLayer.path = self.fillingPath()
             
             let index = Int((self.sliderPosition() + self.diff) / (self._trackLayer.bounds.size.width / CGFloat(self.maxCount - 1)))
@@ -319,7 +327,7 @@ extension StepSlider {
                         trackCircle.fillColor = self.trackCircleColor(trackCircle)
                     }
                 }
-                self.index = index;
+                self.index = index
                 self.sendActions(for: .valueChanged)
                 self._selectFeedback?.impactOccurred()
                 self._selectFeedback?.prepare()
@@ -335,13 +343,13 @@ extension StepSlider {
     public override func cancelTracking(with event: UIEvent?) {
         self.endTouches()
     }
-
+    
     func endTouches()
     {
         let newIndex = Int(round(self.indexCalculate()))
         
         if (newIndex != index) {
-            index = Int(newIndex);
+            index = Int(newIndex)
             self.sendActions(for: .valueChanged)
         }
         
@@ -353,10 +361,55 @@ extension StepSlider {
 }
 
 
-private func withoutCAAnimation(code: () ->Void)
-{
-    CATransaction.begin()
-    CATransaction.setValue( kCFBooleanTrue, forKey: kCATransactionDisableActions)
-    code();
-    CATransaction.commit()
+// MARK: - Texts
+
+extension StepSlider {
+    
+    
+    func
+        textLayerWithSize(_ size:CGSize, index:Int) -> CATextLayer
+    {
+        var size = size
+        if (index >= _trackLabelsArray.count) {
+            let trackLabel:CATextLayer = CATextLayer()
+            
+            var anchorPoint:CGPoint = CGPoint(x: 0.5, y: 0)
+            var alignmentMode = CATextLayerAlignmentMode.center
+            
+            if (self.adjustLabel) {
+                if (index == 0) {
+                    alignmentMode = CATextLayerAlignmentMode.left
+                    size.width = size.width / 2 + maxRadius
+                    anchorPoint.x = maxRadius / size.width
+                } else if (index == self.labels.count - 1) {
+                    alignmentMode = CATextLayerAlignmentMode.right
+                    size.width = size.width / 2 + maxRadius
+                    anchorPoint.x = 1 - maxRadius / size.width
+                }
+            }
+            
+            trackLabel.alignmentMode =  alignmentMode
+            trackLabel.isWrapped     = true
+            trackLabel.contentsScale = UIScreen.main.scale
+            trackLabel.anchorPoint   = anchorPoint
+            
+            let fontName:CFString = self.labelFont.fontName as CFString
+            
+            let  fontRef: CGFont? = CGFont(fontName)
+            
+            trackLabel.font     = fontRef
+            trackLabel.fontSize = self.labelFont.pointSize
+            
+            trackLabel.string = self.labels[index]
+            trackLabel.bounds = CGRect(x: 0, y: 0, width: size.width, height: size.height)
+            
+            self.layer.addSublayer(trackLabel)
+            _trackLabelsArray.append(trackLabel)
+            
+            return trackLabel
+        } else {
+            return _trackLabelsArray[index]
+        }
+    }
+    
 }
