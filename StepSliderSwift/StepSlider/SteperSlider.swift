@@ -77,11 +77,6 @@ extension StepSlider {
     {
         return contentSize
     }
-    
-    func roundForTextDrawing(_ value: CGFloat) -> CGFloat
-    {
-        return floor(value * UIScreen.main.scale) / UIScreen.main.scale
-    }
 }
 
 
@@ -411,5 +406,17 @@ extension StepSlider {
             return _trackLabelsArray[index]
         }
     }
+    func removeLabelLayers()
+    {
+        for label in _trackLabelsArray {
+            label.removeFromSuperlayer()
+        }
+        _trackLabelsArray.removeAll(keepingCapacity: true)
+    }
+
     
+    func roundForTextDrawing(_ value: CGFloat) -> CGFloat
+    {
+        return floor(value * UIScreen.main.scale) / UIScreen.main.scale
+    }
 }
