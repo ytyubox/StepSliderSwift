@@ -80,7 +80,7 @@ public class StepSlider:UIControl {
      *  Font of dot labels.
      *  Can not be `IBInspectable`. http://openradar.appspot.com/21889252
      */
-    public var labelFont: UIFont?
+    public var labelFont: UIFont = UIFont.systemFont(ofSize: 15)
     
     /**
      *  Color of dot labels.

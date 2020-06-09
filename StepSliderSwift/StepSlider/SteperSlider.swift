@@ -73,6 +73,11 @@ extension StepSlider {
     {
         return contentSize
     }
+    
+    func roundForTextDrawing(_ value: CGFloat) -> CGFloat
+    {
+        return floor(value * UIScreen.main.scale) / UIScreen.main.scale
+    }
 }
 
 
@@ -105,49 +110,53 @@ extension StepSlider {
         basicTrackCircleAnimation.fromValue = fromValue;
         basicTrackCircleAnimation.toValue   = toValue;
         
-        //
-        //        [trackCircle addAnimation:basicTrackCircleAnimation forKey:kTrackAnimation];
-        //        [trackCircle setValue:basicTrackCircleAnimation.toValue forKey:basicTrackCircleAnimation.keyPath];
+        trackCircle.add(basicTrackCircleAnimation, forKey: Self.kTrackAnimation)
+        trackCircle.setValue(basicTrackCircleAnimation.toValue, forKey: basicTrackCircleAnimation.keyPath!)
     }
     
-    //    - (NSMutableArray *)clearExcessLayers:(NSMutableArray *)layers
-    //    {
-    //        if (layers.count > self.maxCount) {
-    //
-    //            for (NSUInteger i = self.maxCount; i < layers.count; i++) {
-    //                [layers[i] removeFromSuperlayer];
-    //            }
-    //
-    //            return [[layers subarrayWithRange:NSMakeRange(0, self.maxCount)] mutableCopy];
-    //        }
-    //
-    //        return layers;
-    //    }
-    //
-    //    - (CGFloat)labelHeightWithMaxWidth:(CGFloat)maxWidth
-    //    {
-    //        if (self.labels.count) {
-    //            CGFloat labelHeight = 0.f;
-    //
-    //            for (NSUInteger i = 0; i < self.labels.count; i++) {
-    //                CGSize size;
-    //                if (self.adjustLabel && (i == 0 || i == self.labels.count - 1)) {
-    //                    size = CGSizeMake([self roundForTextDrawing:maxWidth / 2.f + maxRadius], CGFLOAT_MAX);
-    //                } else {
-    //                    size = CGSizeMake([self roundForTextDrawing:maxWidth], CGFLOAT_MAX);
-    //                }
-    //
-    //                CGFloat height = [self.labels[i] boundingRectWithSize:size
-    //                                                              options:NSStringDrawingUsesLineFragmentOrigin
-    //                                                           attributes:@{NSFontAttributeName : self.labelFont}
-    //                                                              context:nil].size.height;
-    //                labelHeight = fmax(ceil(height), labelHeight);
-    //            }
-    //            return labelHeight;
-    //        }
-    //
-    //        return 0;
-    //    }
+    func clearExcessLayers(layers:Array<CAShapeLayer>) -> Array<CAShapeLayer>
+        
+    {
+        if (layers.count > self.maxCount) {
+            
+            for i in Int(self.maxCount)..<layers.count  {
+                layers[i].removeFromSuperlayer()
+            }
+            
+            return Array(layers[0..<Int(self.maxCount)])
+        }
+        
+        return layers;
+    }
+    
+    func labelHeightWithMaxWidth(_ maxWidth:CGFloat) -> CGFloat {
+        
+        if (self.labels.count != 0) {
+            var  labelHeight: CGFloat = 0
+            
+            for i in 0..<labels.count {
+                var size: CGSize
+                if (self.adjustLabel && (i == 0 || i == self.labels.count - 1)) {
+                    size = CGSize(width: self.roundForTextDrawing(maxWidth) / 2 + maxRadius,
+                                  height: CGFloat.greatestFiniteMagnitude);
+                } else {
+                    size = CGSize(width: self.roundForTextDrawing(maxWidth), height: CGFloat.greatestFiniteMagnitude);
+                }
+                
+                let height:CGFloat =
+                    self.labels[i].boundingRect(
+                        with: size,
+                        options:.usesLineFragmentOrigin,
+                        attributes:[NSAttributedString.Key.font : self.labelFont],
+                        context:nil)
+                        .size.height
+                labelHeight = fmax(ceil(height), labelHeight);
+            }
+            return labelHeight;
+        }
+        
+        return 0;
+    }
     //
     //    /*
     //     Calculate distance from trackCircle center to point where circle cross track line.
