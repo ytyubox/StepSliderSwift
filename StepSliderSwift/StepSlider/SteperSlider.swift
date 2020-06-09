@@ -176,31 +176,31 @@ extension StepSlider {
             }
         }
     //
-    //    - (CGPathRef)fillingPath
-    //    {
-    //        CGRect fillRect     = _trackLayer.bounds;
-    //        fillRect.size.width = self.sliderPosition;
-    //
-    //        return [UIBezierPath bezierPathWithRect:fillRect].CGPath;
-    //    }
-    //
-    //    - (CGFloat)sliderPosition
-    //    {
-    //        return _sliderCircleLayer.position.x - maxRadius;
-    //    }
-    //
-    //    - (CGFloat)trackCirclePosition:(CAShapeLayer *)trackCircle
-    //    {
-    //        return trackCircle.position.x - maxRadius;
-    //    }
-    //
-    //    - (CGFloat)indexCalculate
-    //    {
-    //        return self.sliderPosition / (_trackLayer.bounds.size.width / (self.maxCount - 1));
-    //    }
-    //
-    //    - (BOOL)trackCircleIsSeleceted:(CAShapeLayer *)trackCircle
-    //    {
-    //        return self.sliderPosition + diff >= [self trackCirclePosition:trackCircle];
-    //    }
+    func fillingPath() -> CGPath
+        {
+            var fillRect:  CGRect     = _trackLayer.bounds;
+            fillRect.size.width = self.sliderPosition()
+    
+            return UIBezierPath(rect: fillRect).cgPath
+        }
+    
+        func sliderPosition() -> CGFloat
+        {
+            return _sliderCircleLayer.position.x - maxRadius;
+        }
+    
+    func trackCirclePosition(_ trackCircle:CAShapeLayer) -> CGFloat
+        {
+            return trackCircle.position.x - maxRadius;
+        }
+    
+        func indexCalculate() -> CGFloat
+        {
+            return self.sliderPosition() / (_trackLayer.bounds.size.width / CGFloat(self.maxCount - 1));
+        }
+    
+    func trackCircleIsSeleceted(trackCircle:CAShapeLayer) -> Bool
+        {
+            return self.sliderPosition() + diff >= self.trackCirclePosition(trackCircle)
+        }
 }
