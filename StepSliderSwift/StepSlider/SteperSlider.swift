@@ -61,10 +61,6 @@ extension StepSlider {
         self.setNeedsLayout()
     }
     
-    func updateMaxRadius()
-    {
-        maxRadius = max(self.trackCircleRadius, self.sliderCircleRadius)
-    }
 }
 
 
@@ -165,20 +161,20 @@ extension StepSlider {
         {
             diff = sqrt(fmax(0.0, pow(self.trackCircleRadius, 2.0) - pow(self.trackHeight / 2.0, 2.0)));
         }
-    //
-    //    - (void)updateMaxRadius
-    //    {
-    //        maxRadius = fmaxf(self.trackCircleRadius, self.sliderCircleRadius);
-    //    }
-    //
-    //    - (void)updateIndex
-    //    {
-    //        NSAssert(self.maxCount > 1, @"Elements count must be greater than 1!");
-    //        if (_index > (self.maxCount - 1)) {
-    //            _index = self.maxCount - 1;
-    //            [self sendActionsForControlEvents:UIControlEventValueChanged];
-    //        }
-    //    }
+    
+        func updateMaxRadius()
+        {
+            maxRadius = fmax(self.trackCircleRadius, self.sliderCircleRadius);
+        }
+    
+        func updateIndex()
+        {
+            assert(self.maxCount > 1, "Elements count must be greater than 1!")
+            if (index > (self.maxCount - 1)) {
+                index = Int(self.maxCount - 1);
+                self.sendActions(for: .valueChanged)
+            }
+        }
     //
     //    - (CGPathRef)fillingPath
     //    {
