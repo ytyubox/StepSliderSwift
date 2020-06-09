@@ -21,8 +21,7 @@ extension StepSlider {
     func addLayers()
     {
         dotsInteractionEnabled = true
-        _trackCirclesArray =
-            []
+        _trackCirclesArray = []
         _trackLabelsArray  = []
         _trackCircleImages = [:]
         
@@ -223,13 +222,13 @@ extension StepSlider {
     {
         return trackCircleImageForState(
             self.trackCircleIsSeleceted(trackCircle)
-                ? .selected//UIControlStateSelected
+                ? .selected
                 : .normal
         )
             .cgImage
     }
     
-    func _setTrackCircleImage(image:UIImage ,forState state: UIControl.Event)
+    func _setTrackCircleImage(image:UIImage ,for state: UIControl.State)
     {
         _trackCircleImages[state.rawValue] = image
         self.setNeedsLayout()
@@ -444,7 +443,8 @@ extension StepSlider {
             self.labels = labels
             
             if (self.labels.count > 0) {
-                maxCount = UInt(labels.count);
+                maxCount = UInt(labels.count)
+
             }
             
             self.updateIndex()
@@ -456,7 +456,8 @@ extension StepSlider {
     func setMaxCount(_ maxCount:UInt) {
         
         if (self.maxCount != maxCount && self.labels.count != 0) {
-            self.maxCount = maxCount;
+            self.maxCount = maxCount
+
             self.updateIndex()
             self.setNeedsLayout()
         }

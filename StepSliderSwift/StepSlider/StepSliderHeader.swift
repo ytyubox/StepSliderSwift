@@ -8,9 +8,12 @@
 
 import UIKit
 
-
+@IBDesignable
 public class StepSlider:UIControl {
     
+    public override func prepareForInterfaceBuilder() {
+        
+    }
     public enum StepSliderTextOrientation {
         case down, up
     }
@@ -130,7 +133,7 @@ public class StepSlider:UIControl {
      *  @param state The state that uses the specified image.
      */
     func setTrackCircleImage(image:UIImage, for state : UIControl.State) {
-        setTrackCircleImage(image: image, for: state)
+        _setTrackCircleImage(image: image, for: state)
     }
     //    struct _State {
     var _trackLayer: CAShapeLayer = CAShapeLayer()
