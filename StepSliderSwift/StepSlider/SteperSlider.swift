@@ -25,8 +25,8 @@ extension StepSlider {
         _trackLabelsArray  = []
         _trackCircleImages = [:]
         
-        _trackLayer = CAShapeLayer()
-        _sliderCircleLayer = CAShapeLayer()
+        _trackLayer = CAShapeLayer(layer: layer)
+        _sliderCircleLayer = CAShapeLayer(layer: layer)
         _sliderCircleLayer.contentsScale = UIScreen.main.scale
         
         self.layer.addSublayer(_sliderCircleLayer)
@@ -81,7 +81,223 @@ extension StepSlider {
 
 // MARK: - Draw
 
-
+extension StepSlider {
+    
+    public override func prepareForInterfaceBuilder()
+    {
+        self.updateMaxRadius()
+        super.prepareForInterfaceBuilder()
+    }
+    
+    
+    func layoutLayersAnimated(_ animated:Bool)
+    {
+        let indexDiff:Int = Int(abs(round(self.indexCalculate()) - CGFloat(self.index)));
+        let left:Bool = (Int(round(self.indexCalculate())) - self.index) < 0;
+        
+        let contentWidth:CGFloat  = self.bounds.size.width - 2 * maxRadius;
+        let stepWidth:CGFloat     = contentWidth / CGFloat(self.maxCount - 1);
+        
+        let sliderHeight:CGFloat  = fmax((maxRadius), (self.trackHeight / 2.0)) * 2.0;
+        let labelsHeight:CGFloat  = self.labelHeightWithMaxWidth(stepWidth) + self.labelOffset;
+        let totalHeight:CGFloat   = sliderHeight + labelsHeight;
+        
+        contentSize = CGSize(width: fmax(44.0, self.bounds.size.width), height: fmax(44.0, totalHeight));
+        if (!self.bounds.size.equalTo(contentSize)) {
+            if (self.constraints.count > 0) {
+                self.invalidateIntrinsicContentSize()
+            } else {
+                var newFrame:CGRect = self.frame
+                newFrame.size = contentSize;
+                self.frame = newFrame;
+            }
+        }
+        
+        var contentFrameY:CGFloat = (self.bounds.size.height - totalHeight) / 2.0;
+        
+        if (self.labelOrientation == .up && self.labels.count > 0) {
+            contentFrameY += labelsHeight;
+        }
+        
+        let contentFrame:CGRect = CGRect(x: maxRadius, y: contentFrameY, width: contentWidth, height: sliderHeight);
+        
+        let circleFrameSide:CGFloat = self.trackCircleRadius * 2.0
+        let sliderDiameter:CGFloat  = self.sliderCircleRadius * 2.0
+        
+        let oldPosition:CGPoint = _sliderCircleLayer.position;
+        let oldPath:CGPath   = _trackLayer.path!;
+        
+        let labelsY:CGFloat = self.labelOrientation == .up
+            ? (self.bounds.size.height - totalHeight) / 2.0
+            : (contentFrame.maxY + self.labelOffset);
+        
+        if (!animated) {
+            CATransaction.begin()
+            CATransaction.setValue(kCFBooleanTrue, forKey:kCATransactionDisableActions)
+        }
+        
+        _sliderCircleLayer.path     = nil
+        _sliderCircleLayer.contents = nil;
+        
+        if ((self.sliderCircleImage) != nil) {
+            _sliderCircleLayer.frame    = CGRect(
+                x: 0.0,
+                y: 0.0,
+                width: fmax(self.sliderCircleImage!.size.width, 44.0),
+                height: fmax(self.sliderCircleImage!.size.height, 44.0));
+            _sliderCircleLayer.contents = self.sliderCircleImage?.cgImage
+            _sliderCircleLayer.contentsGravity = CALayerContentsGravity.center;
+        } else {
+            let sliderFrameSide :CGFloat = fmax(self.sliderCircleRadius * 2.0, 44.0);
+            let sliderDrawRect :CGRect  = CGRect(
+                x: (sliderFrameSide - sliderDiameter) / 2.0,
+                y: (sliderFrameSide - sliderDiameter) / 2.0,
+                width: sliderDiameter,
+                height: sliderDiameter)
+            
+            _sliderCircleLayer.frame     = CGRect(
+                x: 0.0,
+                y: 0.0,
+                width: sliderFrameSide,
+                height: sliderFrameSide)
+            _sliderCircleLayer.path      = UIBezierPath(roundedRect: sliderDrawRect,
+                cornerRadius: sliderFrameSide).cgPath
+                
+    
+            _sliderCircleLayer.fillColor = self.sliderCircleColor.cgColor
+        }
+        _sliderCircleLayer.position = CGPoint(x: contentFrame.origin.x + stepWidth * CGFloat(self.index),
+                                              y: contentFrame.midY);
+        
+        if (animated) {
+            let  basicSliderAnimation:CABasicAnimation = CABasicAnimation(keyPath: "position")
+            basicSliderAnimation.duration = CATransaction.animationDuration()
+            basicSliderAnimation.fromValue = NSValue(cgPoint: oldPosition)
+            _sliderCircleLayer.add(basicSliderAnimation, forKey: "position")
+        }
+        
+        _trackLayer.frame = CGRect(x: contentFrame.origin.x,
+                                   y: contentFrame.midY - self.trackHeight / 2.0,
+                                   width: contentFrame.size.width,
+                                   height: self.trackHeight);
+        _trackLayer.path            = self.fillingPath()
+        _trackLayer.backgroundColor = self.trackColor.cgColor
+        _trackLayer.fillColor       = self.tintColor.cgColor
+        
+        if (animated) {
+            let basicTrackAnimation: CABasicAnimation = CABasicAnimation(keyPath: "path")
+            basicTrackAnimation.duration = CATransaction.animationDuration()
+            basicTrackAnimation.fromValue = (oldPath)
+            _trackLayer.add(basicTrackAnimation, forKey: "path")
+        }
+        
+        
+        _trackCirclesArray = self.clearExcessLayers(layers: _trackCirclesArray)
+        
+        let currentWidth:CGFloat = self.adjustLabel
+            ? (_trackLabelsArray.first!.bounds.size.width) * 2
+            :  _trackLabelsArray.first!.bounds.size.width
+        if ((currentWidth > 0 && currentWidth != stepWidth) || !(self.labels.count > 0)) {
+            self.removeLabelLayers()
+        }
+        
+        var animationTimeDiff:TimeInterval = 0
+        if (indexDiff > 0) {
+            animationTimeDiff = (left
+                ? CATransaction.animationDuration()
+                : -CATransaction.animationDuration()) / Double(indexDiff);
+        }
+        var animationTime:TimeInterval = left
+            ? animationTimeDiff
+            : CATransaction.animationDuration() + animationTimeDiff;
+        let circleAnimation:CGFloat      = circleFrameSide / _trackLayer.frame.size.width;
+        
+        for i in 0..<self.maxCount {
+            let trackCircle:CAShapeLayer
+            var trackLabel:CATextLayer?
+            
+            if (self.labels.count > 0) {
+                trackLabel = self.textLayerWithSize(CGSize(width: self.roundForTextDrawing(stepWidth),height: labelsHeight - self.labelOffset), index: Int(i))
+            }
+            
+            if (i < _trackCirclesArray.count) {
+                trackCircle = _trackCirclesArray[Int(i)];
+            } else {
+                trackCircle = CAShapeLayer( layer: layer)
+                trackCircle.actions?["fillColor"] = nil
+                
+                self.layer.addSublayer(trackCircle)
+                
+                _trackCirclesArray.append(trackCircle)
+            }
+            
+            
+            trackCircle.bounds   = CGRect(x: 0.0, y: 0.0, width: circleFrameSide, height: circleFrameSide)
+            trackCircle.position = CGPoint(x: contentFrame.origin.x + stepWidth * CGFloat(i), y: contentFrame.midY)
+            
+            let trackCircleImage:CGImage? = self.trackCircleImage(trackCircle)
+            if (trackCircleImage == nil) {
+                trackCircle.path = UIBezierPath(roundedRect: trackCircle.bounds, cornerRadius: circleFrameSide / 2).cgPath
+                trackCircle.contents = nil
+            } else {
+                trackCircle.path = nil
+            }
+            
+            trackLabel?.position        = CGPoint(x: contentFrame.origin.x + stepWidth * CGFloat(i), y: labelsY);
+            trackLabel?.foregroundColor = self.labelColor.cgColor
+            
+            if (animated) {
+                if let trackCircleImage = trackCircleImage {
+                    let oldImage:CGImage = trackCircle.contents as! CGImage
+                    
+                    if (oldImage != trackCircleImage) {
+                        self.animateTrackCircleChanges(
+                            trackCircle,
+                            keyPath:"contents",
+                            beginTime:animationTime,
+                            duration:TimeInterval(circleAnimation),
+                            from:oldImage,
+                            to:trackCircleImage)
+                        animationTime += animationTimeDiff
+                    }
+                } else {
+                    let newColor: CGColor? = self.trackCircleColor(trackCircle)
+                    let oldColor: CGColor? = trackCircle.fillColor
+                    
+                    if (newColor == oldColor) {
+                        self.animateTrackCircleChanges(
+                            trackCircle,
+                            keyPath:"fillColor",
+                            beginTime:animationTime,
+                            duration:TimeInterval(circleAnimation),
+                            from:oldColor,
+                            to:newColor)
+                        animationTime += animationTimeDiff
+                    }
+                }
+            } else {
+                if let trackCircleImage = trackCircleImage {
+                    trackCircle.contents = trackCircleImage
+                } else {
+                    trackCircle.fillColor = self.trackCircleColor(trackCircle)
+                }
+            }
+            
+        }
+        
+        if (!animated) {
+            CATransaction.commit()
+        }
+        
+        _sliderCircleLayer.removeFromSuperlayer()
+        self.layer.addSublayer(_sliderCircleLayer)
+    }
+    public override func layoutSubviews() {
+        super.layoutSubviews()
+        self.layoutLayersAnimated(true)
+        animateLayouts = false
+    }
+}
 // MARK: - Helper
 
 
@@ -444,7 +660,7 @@ extension StepSlider {
             
             if (self.labels.count > 0) {
                 maxCount = UInt(labels.count)
-
+                
             }
             
             self.updateIndex()
@@ -457,7 +673,7 @@ extension StepSlider {
         
         if (self.maxCount != maxCount && self.labels.count != 0) {
             self.maxCount = maxCount
-
+            
             self.updateIndex()
             self.setNeedsLayout()
         }

@@ -11,9 +11,6 @@ import UIKit
 @IBDesignable
 public class StepSlider:UIControl {
     
-    public override func prepareForInterfaceBuilder() {
-        
-    }
     public enum StepSliderTextOrientation {
         case down, up
     }
