@@ -129,22 +129,22 @@ public class StepSlider:UIControl {
      *  @param image The image to use for the specified state.
      *  @param state The state that uses the specified image.
      */
-    func setTrackCircleImage(image:UIImage, for state : UIControl.State) {
+    public func setTrackCircleImage(image:UIImage, for state : UIControl.State) {
         _setTrackCircleImage(image: image, for: state)
     }
     //    struct _State {
-    var _trackLayer: CAShapeLayer = CAShapeLayer()
-    var _sliderCircleLayer: CAShapeLayer = CAShapeLayer()
-    var _trackCirclesArray: Array<CAShapeLayer> = []
-    var _trackLabelsArray: Array<CATextLayer> = []
-    var _trackCircleImages: Dictionary <UInt, UIImage> = [:]
-    var _selectFeedback: UIImpactFeedbackGenerator?
-    var animateLayouts: Bool = true
-    var maxRadius: CGFloat = 0
-    var diff: CGFloat = 0
-    var startTouchPosition: CGPoint = .zero
-    var startSliderPosition: CGPoint = .zero
-    var contentSize: CGSize = .zero
+    internal var _trackLayer: CAShapeLayer = CAShapeLayer()
+    internal var _sliderCircleLayer: CAShapeLayer = CAShapeLayer()
+    internal var _trackCirclesArray: Array<CAShapeLayer> = []
+    internal var _trackLabelsArray: Array<CATextLayer> = []
+    internal var _trackCircleImages: Dictionary <UInt, UIImage> = [:]
+    internal var _selectFeedback: UIImpactFeedbackGenerator?
+    internal var animateLayouts: Bool = true
+    internal var maxRadius: CGFloat = 0
+    internal var diff: CGFloat = 0
+    internal var startTouchPosition: CGPoint = .zero
+    internal var startSliderPosition: CGPoint = .zero
+    internal var contentSize: CGSize = .zero
     //    }
 }
 
