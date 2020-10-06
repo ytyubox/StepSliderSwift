@@ -1,0 +1,16 @@
+{
+  "object": {
+    "pins": [
+      {
+        "package": "StepSliderSwift",
+        "repositoryURL": "git@github.com:ytyubox/StepSliderSwift.git",
+        "state": {
+          "branch": "master",
+          "revision": "a7d79e281d7a5efeada7f1b20761d076827c6d06",
+          "version": null
+        }
+      }
+    ]
+  },
+  "version": 1
+}

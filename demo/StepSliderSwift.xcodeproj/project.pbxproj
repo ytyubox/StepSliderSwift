@@ -3,18 +3,17 @@
 	archiveVersion = 1;
 	classes = {
 	};
-	objectVersion = 50;
+	objectVersion = 52;
 	objects = {
 
 /* Begin PBXBuildFile section */
+		A71DF263252C2E9200960605 /* StepSlider in Frameworks */ = {isa = PBXBuildFile; productRef = A71DF262252C2E9200960605 /* StepSlider */; };
 		A7F48896248F29020024658F /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = A7F48895248F29020024658F /* AppDelegate.swift */; };
 		A7F48898248F29020024658F /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = A7F48897248F29020024658F /* SceneDelegate.swift */; };
 		A7F4889A248F29020024658F /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A7F48899248F29020024658F /* ViewController.swift */; };
 		A7F4889D248F29020024658F /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = A7F4889B248F29020024658F /* Main.storyboard */; };
 		A7F4889F248F29030024658F /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = A7F4889E248F29030024658F /* Assets.xcassets */; };
 		A7F488A2248F29030024658F /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = A7F488A0248F29030024658F /* LaunchScreen.storyboard */; };
-		A7F488AB248F293E0024658F /* StepSliderHeader.swift in Sources */ = {isa = PBXBuildFile; fileRef = A7F488AA248F293E0024658F /* StepSliderHeader.swift */; };
-		A7F488AD248F2BF20024658F /* SteperSlider.swift in Sources */ = {isa = PBXBuildFile; fileRef = A7F488AC248F2BF20024658F /* SteperSlider.swift */; };
 		A7F488B0248F34CC0024658F /* QuartzCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A7F488AF248F34CC0024658F /* QuartzCore.framework */; };
 /* End PBXBuildFile section */
 
@@ -27,8 +26,6 @@
 		A7F4889E248F29030024658F /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		A7F488A1248F29030024658F /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		A7F488A3248F29030024658F /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		A7F488AA248F293E0024658F /* StepSliderHeader.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StepSliderHeader.swift; sourceTree = "<group>"; };
-		A7F488AC248F2BF20024658F /* SteperSlider.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SteperSlider.swift; sourceTree = "<group>"; };
 		A7F488AF248F34CC0024658F /* QuartzCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = QuartzCore.framework; path = System/Library/Frameworks/QuartzCore.framework; sourceTree = SDKROOT; };
 /* End PBXFileReference section */
 
@@ -38,6 +35,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				A7F488B0248F34CC0024658F /* QuartzCore.framework in Frameworks */,
+				A71DF263252C2E9200960605 /* StepSlider in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -64,7 +62,6 @@
 		A7F48894248F29020024658F /* StepSliderSwift */ = {
 			isa = PBXGroup;
 			children = (
-				A7F488A9248F29290024658F /* StepSlider */,
 				A7F48895248F29020024658F /* AppDelegate.swift */,
 				A7F48897248F29020024658F /* SceneDelegate.swift */,
 				A7F48899248F29020024658F /* ViewController.swift */,
@@ -74,15 +71,6 @@
 				A7F488A3248F29030024658F /* Info.plist */,
 			);
 			path = StepSliderSwift;
-			sourceTree = "<group>";
-		};
-		A7F488A9248F29290024658F /* StepSlider */ = {
-			isa = PBXGroup;
-			children = (
-				A7F488AA248F293E0024658F /* StepSliderHeader.swift */,
-				A7F488AC248F2BF20024658F /* SteperSlider.swift */,
-			);
-			path = StepSlider;
 			sourceTree = "<group>";
 		};
 		A7F488AE248F34CB0024658F /* Frameworks */ = {
@@ -109,6 +97,9 @@
 			dependencies = (
 			);
 			name = StepSliderSwift;
+			packageProductDependencies = (
+				A71DF262252C2E9200960605 /* StepSlider */,
+			);
 			productName = StepSliderSwift;
 			productReference = A7F48892248F29020024658F /* StepSliderSwift.app */;
 			productType = "com.apple.product-type.application";
@@ -137,6 +128,9 @@
 				Base,
 			);
 			mainGroup = A7F48889248F29020024658F;
+			packageReferences = (
+				A71DF261252C2E9200960605 /* XCRemoteSwiftPackageReference "StepSliderSwift" */,
+			);
 			productRefGroup = A7F48893248F29020024658F /* Products */;
 			projectDirPath = "";
 			projectRoot = "";
@@ -165,8 +159,6 @@
 			buildActionMask = 2147483647;
 			files = (
 				A7F4889A248F29020024658F /* ViewController.swift in Sources */,
-				A7F488AB248F293E0024658F /* StepSliderHeader.swift in Sources */,
-				A7F488AD248F2BF20024658F /* SteperSlider.swift in Sources */,
 				A7F48896248F29020024658F /* AppDelegate.swift in Sources */,
 				A7F48898248F29020024658F /* SceneDelegate.swift in Sources */,
 			);
@@ -244,7 +236,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 13.5;
+				IPHONEOS_DEPLOYMENT_TARGET = 13.0;
 				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
 				MTL_FAST_MATH = YES;
 				ONLY_ACTIVE_ARCH = YES;
@@ -298,7 +290,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 13.5;
+				IPHONEOS_DEPLOYMENT_TARGET = 13.0;
 				MTL_ENABLE_DEBUG_INFO = NO;
 				MTL_FAST_MATH = YES;
 				SDKROOT = iphoneos;
@@ -366,6 +358,25 @@
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
+
+/* Begin XCRemoteSwiftPackageReference section */
+		A71DF261252C2E9200960605 /* XCRemoteSwiftPackageReference "StepSliderSwift" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "git@github.com:ytyubox/StepSliderSwift.git";
+			requirement = {
+				branch = master;
+				kind = branch;
+			};
+		};
+/* End XCRemoteSwiftPackageReference section */
+
+/* Begin XCSwiftPackageProductDependency section */
+		A71DF262252C2E9200960605 /* StepSlider */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = A71DF261252C2E9200960605 /* XCRemoteSwiftPackageReference "StepSliderSwift" */;
+			productName = StepSlider;
+		};
+/* End XCSwiftPackageProductDependency section */
 	};
 	rootObject = A7F4888A248F29020024658F /* Project object */;
 }

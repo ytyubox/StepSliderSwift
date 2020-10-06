@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import StepSlider
 
 class ViewController: UIViewController {
     
@@ -25,7 +26,7 @@ class ViewController: UIViewController {
     @IBOutlet var sliderView:StepSlider!
     
     @IBAction func changeValue(sender:StepSlider) {
-        
+        selectValue = sender.index
     }
     @IBAction func changeIndex(sender: UIButton) {
         
