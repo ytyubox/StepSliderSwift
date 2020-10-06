@@ -38,11 +38,23 @@ final class stepSliderInternalTests: XCTestCase {
         try XCTSkipIf(subject == nil, "no idea how to provide a coder to `StepSlider(coder:)`, with error message: *** -containsValueForKey: cannot be sent to an abstract object of class NSCoder: Create a concrete instance! (NSInvalidArgumentException)")
         _ = try XCTUnwrap(subject)
     }
-    
+    func test_SliderPosition() throws {
+        let sut = makeSUT()
+        let result = sut.sliderPosition()
+        XCTAssertEqual(result, -12.5)
+    }
+
+    func test_indexCalculate() throws {
+        let sut = makeSUT()
+        let result = sut.indexCalculate()
+        XCTAssertEqual(result, 0)
+    }
+
 
     // MARK: - Test helper
     private func makeSUT() -> StepSliderSPY {
         let sut = StepSliderSPY()
+        
         addTeardownBlock {
             [weak sut] in
             XCTAssertNil(sut, "sut was retain somewhere")

@@ -103,7 +103,7 @@ extension StepSlider {
         let sliderDiameter:CGFloat  = self.sliderCircleRadius * 2.0
         
         let oldPosition:CGPoint = _sliderCircleLayer.position
-        let oldPath:CGPath   = _trackLayer.path!
+        let oldPath:CGPath?   = _trackLayer.path
         
         let labelsY:CGFloat = self.labelOrientation == .up
             ? (self.bounds.size.height - totalHeight) / 2.0
@@ -173,8 +173,8 @@ extension StepSlider {
         _trackCirclesArray = self.clearExcessLayers(layers: _trackCirclesArray)
         
         let currentWidth:CGFloat = self.adjustLabel
-            ? (_trackLabelsArray.first!.bounds.size.width) * 2
-            :  _trackLabelsArray.first!.bounds.size.width
+            ? (_trackLabelsArray.first?.bounds.size.width ?? 0) * 2
+            :  _trackLabelsArray.first?.bounds.size.width ?? 0
         if ((currentWidth > 0 && currentWidth != stepWidth) || !(self.labels.count > 0)) {
             self.removeLabelLayers()
         }
@@ -379,7 +379,7 @@ extension StepSlider {
         
         return UIBezierPath(rect: fillRect).cgPath
     }
-    
+    ///  return _sliderCircleLayer.position.x - maxRadius;
     func sliderPosition() -> CGFloat
     {
         return _sliderCircleLayer.position.x - maxRadius
@@ -390,9 +390,19 @@ extension StepSlider {
         return trackCircle.position.x - maxRadius
     }
     
+    ///
+    ///```objective-c
+    ///- (CGFloat)indexCalculate
+    /// {
+    ///    return self.sliderPosition / (_trackLayer.bounds.size.width / (self.maxCount - 1));
+    ///}
+    ///```
+    ///
     func indexCalculate() -> CGFloat
     {
-        return self.sliderPosition() / (_trackLayer.bounds.size.width / CGFloat(self.maxCount - 1))
+        let width = _trackLayer.bounds.size.width
+        if width == 0 {return 0}
+        return self.sliderPosition() / ( width / CGFloat(self.maxCount - 1))
     }
     
     func trackCircleIsSeleceted(_ trackCircle:CAShapeLayer) -> Bool
@@ -418,8 +428,7 @@ extension StepSlider {
             self.trackCircleIsSeleceted(trackCircle)
                 ? .selected
                 : .normal
-        )
-            .cgImage
+        )?.cgImage
     }
     
     func _setTrackCircleImage(image:UIImage ,for state: UIControl.State)
@@ -428,9 +437,9 @@ extension StepSlider {
         self.setNeedsLayout()
     }
     
-    func trackCircleImageForState(_ state:UIControl.State) -> UIImage
+    func trackCircleImageForState(_ state:UIControl.State) -> UIImage?
     {
-        return _trackCircleImages[state.rawValue] ?? _trackCircleImages[State.normal.rawValue]!
+        return _trackCircleImages[state.rawValue] ?? _trackCircleImages[State.normal.rawValue]
     }
     
 }
