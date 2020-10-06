@@ -132,9 +132,8 @@ public class StepSlider:UIControl {
     public func setTrackCircleImage(image:UIImage, for state : UIControl.State) {
         _setTrackCircleImage(image: image, for: state)
     }
-    //    struct _State {
-    internal var _trackLayer: CAShapeLayer = CAShapeLayer()
-    internal var _sliderCircleLayer: CAShapeLayer = CAShapeLayer()
+    public internal(set) var _trackLayer: CAShapeLayer!
+    public internal(set) var _sliderCircleLayer: CAShapeLayer!
     internal var _trackCirclesArray: Array<CAShapeLayer> = []
     internal var _trackLabelsArray: Array<CATextLayer> = []
     internal var _trackCircleImages: Dictionary <UInt, UIImage> = [:]
@@ -145,6 +144,5 @@ public class StepSlider:UIControl {
     internal var startTouchPosition: CGPoint = .zero
     internal var startSliderPosition: CGPoint = .zero
     internal var contentSize: CGSize = .zero
-    //    }
 }
 

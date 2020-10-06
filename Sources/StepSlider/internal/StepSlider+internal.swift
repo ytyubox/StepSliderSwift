@@ -15,9 +15,19 @@ private func withoutCAAnimation(code: () ->Void)
     code()
     CATransaction.commit()
 }
-
+// MARK: - Init helper
 internal
 extension StepSlider {
+    func generalSetup()
+    {
+        self.addLayers()
+        maxCount = 4
+        trackColor = UIColor.init(white: 0.41, alpha: 1)
+        sliderCircleColor = UIColor.white
+        self.updateMaxRadius()
+        self.setNeedsLayout()
+    }
+    
     func addLayers()
     {
         dotsInteractionEnabled = true
@@ -34,38 +44,6 @@ extension StepSlider {
         
         labelFont = UIFont.systemFont(ofSize: 15)
         contentSize = self.bounds.size
-    }
-    func generalSetup()
-    {
-        self.addLayers()
-        
-        if (maxCount == 0) {
-            maxCount = 4
-        }
-        if (trackHeight == 0) {
-            trackHeight = 4
-        }
-        if (trackCircleRadius == 0) {
-            trackCircleRadius = 5
-        }
-        if (sliderCircleRadius == 0) {
-            sliderCircleRadius = 12.5
-        }
-        if (labelOffset == 0) {
-            labelOffset = 20
-        }
-        if (trackColor == nil) {
-            trackColor = UIColor.init(white: 0.41, alpha: 1)
-        }
-        if (sliderCircleColor == nil) {
-            sliderCircleColor = UIColor.white
-        }
-        if (labelColor != nil) {
-            labelColor = UIColor.white
-        }
-        
-        self.updateMaxRadius()
-        self.setNeedsLayout()
     }
     
 }
@@ -387,7 +365,7 @@ extension StepSlider {
     
     func updateIndex()
     {
-        assert(self.maxCount > 1, "Elements count must be greater than 1!")
+        precondition(self.maxCount > 1, "Elements count must be greater than 1!")
         if (index > (self.maxCount - 1)) {
             index = Int(self.maxCount - 1)
             self.sendActions(for: .valueChanged)
@@ -654,7 +632,7 @@ extension StepSlider {
     
     func setLabels(labels: Array<String> )
     {
-        assert(labels.count != 1, "Labels count can not be equal to 1!")
+        precondition(labels.count != 1, "Labels count can not be equal to 1!")
         if (self.labels != labels) {
             self.labels = labels
             
