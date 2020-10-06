@@ -1,14 +1,13 @@
 //
 //  AppDelegate.swift
-//  StepSliderSwift
+//  StepSliderDEMO
 //
-//  Created by 游宗諭 on 2020/6/9.
-//  Copyright © 2020 游宗諭. All rights reserved.
+//  Created by 游宗諭 on 2020/10/6.
 //
 
 import UIKit
 
-@UIApplicationMain
+@main
 class AppDelegate: UIResponder, UIApplicationDelegate {
 
 

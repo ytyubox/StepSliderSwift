@@ -7,76 +7,74 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		A71DF263252C2E9200960605 /* StepSlider in Frameworks */ = {isa = PBXBuildFile; productRef = A71DF262252C2E9200960605 /* StepSlider */; };
-		A7F48896248F29020024658F /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = A7F48895248F29020024658F /* AppDelegate.swift */; };
-		A7F48898248F29020024658F /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = A7F48897248F29020024658F /* SceneDelegate.swift */; };
-		A7F4889A248F29020024658F /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A7F48899248F29020024658F /* ViewController.swift */; };
-		A7F4889D248F29020024658F /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = A7F4889B248F29020024658F /* Main.storyboard */; };
-		A7F4889F248F29030024658F /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = A7F4889E248F29030024658F /* Assets.xcassets */; };
-		A7F488A2248F29030024658F /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = A7F488A0248F29030024658F /* LaunchScreen.storyboard */; };
-		A7F488B0248F34CC0024658F /* QuartzCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A7F488AF248F34CC0024658F /* QuartzCore.framework */; };
+		A7CFC9E5252C33CD00702E79 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = A7CFC9E4252C33CD00702E79 /* AppDelegate.swift */; };
+		A7CFC9E7252C33CD00702E79 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = A7CFC9E6252C33CD00702E79 /* SceneDelegate.swift */; };
+		A7CFC9E9252C33CD00702E79 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A7CFC9E8252C33CD00702E79 /* ViewController.swift */; };
+		A7CFC9EC252C33CD00702E79 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = A7CFC9EA252C33CD00702E79 /* Main.storyboard */; };
+		A7CFC9EE252C33CE00702E79 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = A7CFC9ED252C33CE00702E79 /* Assets.xcassets */; };
+		A7CFC9F1252C33CE00702E79 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = A7CFC9EF252C33CE00702E79 /* LaunchScreen.storyboard */; };
+		A7CFC9FD252C343E00702E79 /* StepSlider in Frameworks */ = {isa = PBXBuildFile; productRef = A7CFC9FC252C343E00702E79 /* StepSlider */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
-		A7F48892248F29020024658F /* StepSliderSwift.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = StepSliderSwift.app; sourceTree = BUILT_PRODUCTS_DIR; };
-		A7F48895248F29020024658F /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
-		A7F48897248F29020024658F /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
-		A7F48899248F29020024658F /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
-		A7F4889C248F29020024658F /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
-		A7F4889E248F29030024658F /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
-		A7F488A1248F29030024658F /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
-		A7F488A3248F29030024658F /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		A7F488AF248F34CC0024658F /* QuartzCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = QuartzCore.framework; path = System/Library/Frameworks/QuartzCore.framework; sourceTree = SDKROOT; };
+		A7CFC9E1252C33CD00702E79 /* StepSliderDEMO.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = StepSliderDEMO.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		A7CFC9E4252C33CD00702E79 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
+		A7CFC9E6252C33CD00702E79 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
+		A7CFC9E8252C33CD00702E79 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
+		A7CFC9EB252C33CD00702E79 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
+		A7CFC9ED252C33CE00702E79 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
+		A7CFC9F0252C33CE00702E79 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
+		A7CFC9F2252C33CE00702E79 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		A7CFC9F9252C342C00702E79 /* StepSliderSwift */ = {isa = PBXFileReference; lastKnownFileType = folder; name = StepSliderSwift; path = ..; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
-		A7F4888F248F29020024658F /* Frameworks */ = {
+		A7CFC9DE252C33CD00702E79 /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				A7F488B0248F34CC0024658F /* QuartzCore.framework in Frameworks */,
-				A71DF263252C2E9200960605 /* StepSlider in Frameworks */,
+				A7CFC9FD252C343E00702E79 /* StepSlider in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
-		A7F48889248F29020024658F = {
+		A7CFC9D8252C33CD00702E79 = {
 			isa = PBXGroup;
 			children = (
-				A7F48894248F29020024658F /* StepSliderSwift */,
-				A7F48893248F29020024658F /* Products */,
-				A7F488AE248F34CB0024658F /* Frameworks */,
+				A7CFC9F9252C342C00702E79 /* StepSliderSwift */,
+				A7CFC9E3252C33CD00702E79 /* StepSliderDEMO */,
+				A7CFC9E2252C33CD00702E79 /* Products */,
+				A7CFC9FB252C343E00702E79 /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
-		A7F48893248F29020024658F /* Products */ = {
+		A7CFC9E2252C33CD00702E79 /* Products */ = {
 			isa = PBXGroup;
 			children = (
-				A7F48892248F29020024658F /* StepSliderSwift.app */,
+				A7CFC9E1252C33CD00702E79 /* StepSliderDEMO.app */,
 			);
 			name = Products;
 			sourceTree = "<group>";
 		};
-		A7F48894248F29020024658F /* StepSliderSwift */ = {
+		A7CFC9E3252C33CD00702E79 /* StepSliderDEMO */ = {
 			isa = PBXGroup;
 			children = (
-				A7F48895248F29020024658F /* AppDelegate.swift */,
-				A7F48897248F29020024658F /* SceneDelegate.swift */,
-				A7F48899248F29020024658F /* ViewController.swift */,
-				A7F4889B248F29020024658F /* Main.storyboard */,
-				A7F4889E248F29030024658F /* Assets.xcassets */,
-				A7F488A0248F29030024658F /* LaunchScreen.storyboard */,
-				A7F488A3248F29030024658F /* Info.plist */,
+				A7CFC9E4252C33CD00702E79 /* AppDelegate.swift */,
+				A7CFC9E6252C33CD00702E79 /* SceneDelegate.swift */,
+				A7CFC9E8252C33CD00702E79 /* ViewController.swift */,
+				A7CFC9EA252C33CD00702E79 /* Main.storyboard */,
+				A7CFC9ED252C33CE00702E79 /* Assets.xcassets */,
+				A7CFC9EF252C33CE00702E79 /* LaunchScreen.storyboard */,
+				A7CFC9F2252C33CE00702E79 /* Info.plist */,
 			);
-			path = StepSliderSwift;
+			path = StepSliderDEMO;
 			sourceTree = "<group>";
 		};
-		A7F488AE248F34CB0024658F /* Frameworks */ = {
+		A7CFC9FB252C343E00702E79 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
-				A7F488AF248F34CC0024658F /* QuartzCore.framework */,
 			);
 			name = Frameworks;
 			sourceTree = "<group>";
@@ -84,42 +82,41 @@
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
-		A7F48891248F29020024658F /* StepSliderSwift */ = {
+		A7CFC9E0252C33CD00702E79 /* StepSliderDEMO */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = A7F488A6248F29030024658F /* Build configuration list for PBXNativeTarget "StepSliderSwift" */;
+			buildConfigurationList = A7CFC9F5252C33CE00702E79 /* Build configuration list for PBXNativeTarget "StepSliderDEMO" */;
 			buildPhases = (
-				A7F4888E248F29020024658F /* Sources */,
-				A7F4888F248F29020024658F /* Frameworks */,
-				A7F48890248F29020024658F /* Resources */,
+				A7CFC9DD252C33CD00702E79 /* Sources */,
+				A7CFC9DE252C33CD00702E79 /* Frameworks */,
+				A7CFC9DF252C33CD00702E79 /* Resources */,
 			);
 			buildRules = (
 			);
 			dependencies = (
 			);
-			name = StepSliderSwift;
+			name = StepSliderDEMO;
 			packageProductDependencies = (
-				A71DF262252C2E9200960605 /* StepSlider */,
+				A7CFC9FC252C343E00702E79 /* StepSlider */,
 			);
-			productName = StepSliderSwift;
-			productReference = A7F48892248F29020024658F /* StepSliderSwift.app */;
+			productName = StepSliderDEMO;
+			productReference = A7CFC9E1252C33CD00702E79 /* StepSliderDEMO.app */;
 			productType = "com.apple.product-type.application";
 		};
 /* End PBXNativeTarget section */
 
 /* Begin PBXProject section */
-		A7F4888A248F29020024658F /* Project object */ = {
+		A7CFC9D9252C33CD00702E79 /* Project object */ = {
 			isa = PBXProject;
 			attributes = {
-				LastSwiftUpdateCheck = 1150;
-				LastUpgradeCheck = 1150;
-				ORGANIZATIONNAME = "游宗諭";
+				LastSwiftUpdateCheck = 1200;
+				LastUpgradeCheck = 1200;
 				TargetAttributes = {
-					A7F48891248F29020024658F = {
-						CreatedOnToolsVersion = 11.5;
+					A7CFC9E0252C33CD00702E79 = {
+						CreatedOnToolsVersion = 12.0.1;
 					};
 				};
 			};
-			buildConfigurationList = A7F4888D248F29020024658F /* Build configuration list for PBXProject "StepSliderSwift" */;
+			buildConfigurationList = A7CFC9DC252C33CD00702E79 /* Build configuration list for PBXProject "StepSliderDEMO" */;
 			compatibilityVersion = "Xcode 9.3";
 			developmentRegion = en;
 			hasScannedForEncodings = 0;
@@ -127,58 +124,55 @@
 				en,
 				Base,
 			);
-			mainGroup = A7F48889248F29020024658F;
-			packageReferences = (
-				A71DF261252C2E9200960605 /* XCRemoteSwiftPackageReference "StepSliderSwift" */,
-			);
-			productRefGroup = A7F48893248F29020024658F /* Products */;
+			mainGroup = A7CFC9D8252C33CD00702E79;
+			productRefGroup = A7CFC9E2252C33CD00702E79 /* Products */;
 			projectDirPath = "";
 			projectRoot = "";
 			targets = (
-				A7F48891248F29020024658F /* StepSliderSwift */,
+				A7CFC9E0252C33CD00702E79 /* StepSliderDEMO */,
 			);
 		};
 /* End PBXProject section */
 
 /* Begin PBXResourcesBuildPhase section */
-		A7F48890248F29020024658F /* Resources */ = {
+		A7CFC9DF252C33CD00702E79 /* Resources */ = {
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				A7F488A2248F29030024658F /* LaunchScreen.storyboard in Resources */,
-				A7F4889F248F29030024658F /* Assets.xcassets in Resources */,
-				A7F4889D248F29020024658F /* Main.storyboard in Resources */,
+				A7CFC9F1252C33CE00702E79 /* LaunchScreen.storyboard in Resources */,
+				A7CFC9EE252C33CE00702E79 /* Assets.xcassets in Resources */,
+				A7CFC9EC252C33CD00702E79 /* Main.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
-		A7F4888E248F29020024658F /* Sources */ = {
+		A7CFC9DD252C33CD00702E79 /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				A7F4889A248F29020024658F /* ViewController.swift in Sources */,
-				A7F48896248F29020024658F /* AppDelegate.swift in Sources */,
-				A7F48898248F29020024658F /* SceneDelegate.swift in Sources */,
+				A7CFC9E9252C33CD00702E79 /* ViewController.swift in Sources */,
+				A7CFC9E5252C33CD00702E79 /* AppDelegate.swift in Sources */,
+				A7CFC9E7252C33CD00702E79 /* SceneDelegate.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXSourcesBuildPhase section */
 
 /* Begin PBXVariantGroup section */
-		A7F4889B248F29020024658F /* Main.storyboard */ = {
+		A7CFC9EA252C33CD00702E79 /* Main.storyboard */ = {
 			isa = PBXVariantGroup;
 			children = (
-				A7F4889C248F29020024658F /* Base */,
+				A7CFC9EB252C33CD00702E79 /* Base */,
 			);
 			name = Main.storyboard;
 			sourceTree = "<group>";
 		};
-		A7F488A0248F29030024658F /* LaunchScreen.storyboard */ = {
+		A7CFC9EF252C33CE00702E79 /* LaunchScreen.storyboard */ = {
 			isa = PBXVariantGroup;
 			children = (
-				A7F488A1248F29030024658F /* Base */,
+				A7CFC9F0252C33CE00702E79 /* Base */,
 			);
 			name = LaunchScreen.storyboard;
 			sourceTree = "<group>";
@@ -186,7 +180,7 @@
 /* End PBXVariantGroup section */
 
 /* Begin XCBuildConfiguration section */
-		A7F488A4248F29030024658F /* Debug */ = {
+		A7CFC9F3252C33CE00702E79 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
@@ -212,6 +206,7 @@
 				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
 				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
 				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = YES;
 				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
 				CLANG_WARN_STRICT_PROTOTYPES = YES;
 				CLANG_WARN_SUSPICIOUS_MOVE = YES;
@@ -246,7 +241,7 @@
 			};
 			name = Debug;
 		};
-		A7F488A5248F29030024658F /* Release */ = {
+		A7CFC9F4252C33CE00702E79 /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
@@ -272,6 +267,7 @@
 				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
 				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
 				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = YES;
 				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
 				CLANG_WARN_STRICT_PROTOTYPES = YES;
 				CLANG_WARN_SUSPICIOUS_MOVE = YES;
@@ -300,36 +296,38 @@
 			};
 			name = Release;
 		};
-		A7F488A7248F29030024658F /* Debug */ = {
+		A7CFC9F6252C33CE00702E79 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = 3AMPL46LPV;
-				INFOPLIST_FILE = StepSliderSwift/Info.plist;
+				INFOPLIST_FILE = StepSliderDEMO/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = com.ytyubox.StepSliderSwift;
+				PRODUCT_BUNDLE_IDENTIFIER = com.ytyubox.StepSliderDEMO;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
 			name = Debug;
 		};
-		A7F488A8248F29030024658F /* Release */ = {
+		A7CFC9F7252C33CE00702E79 /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = 3AMPL46LPV;
-				INFOPLIST_FILE = StepSliderSwift/Info.plist;
+				INFOPLIST_FILE = StepSliderDEMO/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = com.ytyubox.StepSliderSwift;
+				PRODUCT_BUNDLE_IDENTIFIER = com.ytyubox.StepSliderDEMO;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
@@ -339,44 +337,32 @@
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
-		A7F4888D248F29020024658F /* Build configuration list for PBXProject "StepSliderSwift" */ = {
+		A7CFC9DC252C33CD00702E79 /* Build configuration list for PBXProject "StepSliderDEMO" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
-				A7F488A4248F29030024658F /* Debug */,
-				A7F488A5248F29030024658F /* Release */,
+				A7CFC9F3252C33CE00702E79 /* Debug */,
+				A7CFC9F4252C33CE00702E79 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		A7F488A6248F29030024658F /* Build configuration list for PBXNativeTarget "StepSliderSwift" */ = {
+		A7CFC9F5252C33CE00702E79 /* Build configuration list for PBXNativeTarget "StepSliderDEMO" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
-				A7F488A7248F29030024658F /* Debug */,
-				A7F488A8248F29030024658F /* Release */,
+				A7CFC9F6252C33CE00702E79 /* Debug */,
+				A7CFC9F7252C33CE00702E79 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 
-/* Begin XCRemoteSwiftPackageReference section */
-		A71DF261252C2E9200960605 /* XCRemoteSwiftPackageReference "StepSliderSwift" */ = {
-			isa = XCRemoteSwiftPackageReference;
-			repositoryURL = "git@github.com:ytyubox/StepSliderSwift.git";
-			requirement = {
-				branch = master;
-				kind = branch;
-			};
-		};
-/* End XCRemoteSwiftPackageReference section */
-
 /* Begin XCSwiftPackageProductDependency section */
-		A71DF262252C2E9200960605 /* StepSlider */ = {
+		A7CFC9FC252C343E00702E79 /* StepSlider */ = {
 			isa = XCSwiftPackageProductDependency;
-			package = A71DF261252C2E9200960605 /* XCRemoteSwiftPackageReference "StepSliderSwift" */;
 			productName = StepSlider;
 		};
 /* End XCSwiftPackageProductDependency section */
 	};
-	rootObject = A7F4888A248F29020024658F /* Project object */;
+	rootObject = A7CFC9D9252C33CD00702E79 /* Project object */;
 }

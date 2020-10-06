@@ -25,6 +25,7 @@ extension StepSlider {
         trackColor = UIColor.init(white: 0.41, alpha: 1)
         sliderCircleColor = UIColor.white
         self.updateMaxRadius()
+        self.layoutLayersAnimated(false)
         self.setNeedsLayout()
     }
     
