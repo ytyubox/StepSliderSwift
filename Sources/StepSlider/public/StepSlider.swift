@@ -11,7 +11,7 @@ import UIKit
 @IBDesignable
 public class StepSlider:UIControl {
     
-    public enum StepSliderTextOrientation {
+    public enum TextOrientation {
         case down, up
     }
     
@@ -95,7 +95,7 @@ public class StepSlider:UIControl {
     /**
      *  Current vertical orientatons of dot labels.
      */
-    public var  labelOrientation: StepSliderTextOrientation = .down
+    public var  labelOrientation: TextOrientation = .down
     
     /**
      *  If `YES` adjust first and last labels to StepSlider frame. And change alingment to left and right.
