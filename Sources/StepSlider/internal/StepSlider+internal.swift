@@ -92,44 +92,44 @@ extension StepSlider {
     
     func layoutLayersAnimated(_ animated:Bool)
     {
-        let indexDiff:Int = Int(abs(round(self.indexCalculate()) - CGFloat(self.index)));
-        let left:Bool = (Int(round(self.indexCalculate())) - self.index) < 0;
+        let indexDiff:Int = Int(abs(round(self.indexCalculate()) - CGFloat(self.index)))
+        let left:Bool = (Int(round(self.indexCalculate())) - self.index) < 0
         
-        let contentWidth:CGFloat  = self.bounds.size.width - 2 * maxRadius;
-        let stepWidth:CGFloat     = contentWidth / CGFloat(self.maxCount - 1);
+        let contentWidth:CGFloat  = self.bounds.size.width - 2 * maxRadius
+        let stepWidth:CGFloat     = contentWidth / CGFloat(self.maxCount - 1)
         
-        let sliderHeight:CGFloat  = fmax((maxRadius), (self.trackHeight / 2.0)) * 2.0;
-        let labelsHeight:CGFloat  = self.labelHeightWithMaxWidth(stepWidth) + self.labelOffset;
-        let totalHeight:CGFloat   = sliderHeight + labelsHeight;
+        let sliderHeight:CGFloat  = fmax((maxRadius), (self.trackHeight / 2.0)) * 2.0
+        let labelsHeight:CGFloat  = self.labelHeightWithMaxWidth(stepWidth) + self.labelOffset
+        let totalHeight:CGFloat   = sliderHeight + labelsHeight
         
-        contentSize = CGSize(width: fmax(44.0, self.bounds.size.width), height: fmax(44.0, totalHeight));
+        contentSize = CGSize(width: fmax(44.0, self.bounds.size.width), height: fmax(44.0, totalHeight))
         if (!self.bounds.size.equalTo(contentSize)) {
             if (self.constraints.count > 0) {
                 self.invalidateIntrinsicContentSize()
             } else {
                 var newFrame:CGRect = self.frame
-                newFrame.size = contentSize;
-                self.frame = newFrame;
+                newFrame.size = contentSize
+                self.frame = newFrame
             }
         }
         
-        var contentFrameY:CGFloat = (self.bounds.size.height - totalHeight) / 2.0;
+        var contentFrameY:CGFloat = (self.bounds.size.height - totalHeight) / 2.0
         
         if (self.labelOrientation == .up && self.labels.count > 0) {
-            contentFrameY += labelsHeight;
+            contentFrameY += labelsHeight
         }
         
-        let contentFrame:CGRect = CGRect(x: maxRadius, y: contentFrameY, width: contentWidth, height: sliderHeight);
+        let contentFrame:CGRect = CGRect(x: maxRadius, y: contentFrameY, width: contentWidth, height: sliderHeight)
         
         let circleFrameSide:CGFloat = self.trackCircleRadius * 2.0
         let sliderDiameter:CGFloat  = self.sliderCircleRadius * 2.0
         
-        let oldPosition:CGPoint = _sliderCircleLayer.position;
-        let oldPath:CGPath   = _trackLayer.path!;
+        let oldPosition:CGPoint = _sliderCircleLayer.position
+        let oldPath:CGPath   = _trackLayer.path!
         
         let labelsY:CGFloat = self.labelOrientation == .up
             ? (self.bounds.size.height - totalHeight) / 2.0
-            : (contentFrame.maxY + self.labelOffset);
+            : (contentFrame.maxY + self.labelOffset)
         
         if (!animated) {
             CATransaction.begin()
@@ -137,18 +137,18 @@ extension StepSlider {
         }
         
         _sliderCircleLayer.path     = nil
-        _sliderCircleLayer.contents = nil;
+        _sliderCircleLayer.contents = nil
         
         if ((self.sliderCircleImage) != nil) {
             _sliderCircleLayer.frame    = CGRect(
                 x: 0.0,
                 y: 0.0,
                 width: fmax(self.sliderCircleImage!.size.width, 44.0),
-                height: fmax(self.sliderCircleImage!.size.height, 44.0));
+                height: fmax(self.sliderCircleImage!.size.height, 44.0))
             _sliderCircleLayer.contents = self.sliderCircleImage?.cgImage
-            _sliderCircleLayer.contentsGravity = CALayerContentsGravity.center;
+            _sliderCircleLayer.contentsGravity = CALayerContentsGravity.center
         } else {
-            let sliderFrameSide :CGFloat = fmax(self.sliderCircleRadius * 2.0, 44.0);
+            let sliderFrameSide :CGFloat = fmax(self.sliderCircleRadius * 2.0, 44.0)
             let sliderDrawRect :CGRect  = CGRect(
                 x: (sliderFrameSide - sliderDiameter) / 2.0,
                 y: (sliderFrameSide - sliderDiameter) / 2.0,
@@ -167,7 +167,7 @@ extension StepSlider {
             _sliderCircleLayer.fillColor = self.sliderCircleColor.cgColor
         }
         _sliderCircleLayer.position = CGPoint(x: contentFrame.origin.x + stepWidth * CGFloat(self.index),
-                                              y: contentFrame.midY);
+                                              y: contentFrame.midY)
         
         if (animated) {
             let  basicSliderAnimation:CABasicAnimation = CABasicAnimation(keyPath: "position")
@@ -179,7 +179,7 @@ extension StepSlider {
         _trackLayer.frame = CGRect(x: contentFrame.origin.x,
                                    y: contentFrame.midY - self.trackHeight / 2.0,
                                    width: contentFrame.size.width,
-                                   height: self.trackHeight);
+                                   height: self.trackHeight)
         _trackLayer.path            = self.fillingPath()
         _trackLayer.backgroundColor = self.trackColor.cgColor
         _trackLayer.fillColor       = self.tintColor.cgColor
@@ -205,12 +205,12 @@ extension StepSlider {
         if (indexDiff > 0) {
             animationTimeDiff = (left
                 ? CATransaction.animationDuration()
-                : -CATransaction.animationDuration()) / Double(indexDiff);
+                : -CATransaction.animationDuration()) / Double(indexDiff)
         }
         var animationTime:TimeInterval = left
             ? animationTimeDiff
-            : CATransaction.animationDuration() + animationTimeDiff;
-        let circleAnimation:CGFloat      = circleFrameSide / _trackLayer.frame.size.width;
+            : CATransaction.animationDuration() + animationTimeDiff
+        let circleAnimation:CGFloat      = circleFrameSide / _trackLayer.frame.size.width
         
         for i in 0..<self.maxCount {
             let trackCircle:CAShapeLayer
@@ -221,7 +221,7 @@ extension StepSlider {
             }
             
             if (i < _trackCirclesArray.count) {
-                trackCircle = _trackCirclesArray[Int(i)];
+                trackCircle = _trackCirclesArray[Int(i)]
             } else {
                 trackCircle = CAShapeLayer( layer: layer)
                 trackCircle.actions?["fillColor"] = nil
@@ -243,7 +243,7 @@ extension StepSlider {
                 trackCircle.path = nil
             }
             
-            trackLabel?.position        = CGPoint(x: contentFrame.origin.x + stepWidth * CGFloat(i), y: labelsY);
+            trackLabel?.position        = CGPoint(x: contentFrame.origin.x + stepWidth * CGFloat(i), y: labelsY)
             trackLabel?.foregroundColor = self.labelColor.cgColor
             
             if (animated) {
