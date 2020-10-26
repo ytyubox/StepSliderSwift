@@ -12,7 +12,7 @@ class CustomStepSlider: UIControl {
         let slider = UISlider()
         slider.addTarget(self, action: #selector(sliderValueChanged), for: .valueChanged)
         slider.translatesAutoresizingMaskIntoConstraints = false
-        slider.minimumTrackTintColor = .darkGray
+        slider.minimumTrackTintColor = .systemBlue
         slider.maximumTrackTintColor = .darkGray
         addSubview(slider)
         
@@ -38,6 +38,7 @@ class CustomStepSlider: UIControl {
         get { UInt(round(slider.value)) }
         set {
             slider.value = Float(newValue)
+            updateTrackCircles()
         }
     }
     
@@ -75,8 +76,17 @@ class CustomStepSlider: UIControl {
         }
     }
     
+    private func updateTrackCircles() {
+        _trackCirclesArray.enumerated().forEach { index, circle in
+            circle.fillColor = (index > step) ?
+                slider.maximumTrackTintColor?.cgColor :
+                slider.minimumTrackTintColor?.cgColor
+        }
+    }
+    
     @objc private func sliderValueChanged() {
         slider.value = Float(step)
+        updateTrackCircles()
         sendActions(for: .valueChanged)
     }
 }
@@ -90,6 +100,16 @@ class CustomStepSliderSnapshotTests: XCTestCase {
         
         let snapshot = sut.snapshot(for: .init(size: sut.frame.size))
         assert(snapshot: snapshot, named: "three_steps")
+    }
+    
+    func test_secondStep_outOfFour() {
+        let sut = CustomStepSlider(frame: CGRect(x: 0, y: 0, width: 200, height: 100))
+        sut.maximumSteps = 4
+        sut.step = 1
+        sut.backgroundColor = .systemBackground
+        
+        let snapshot = sut.snapshot(for: .init(size: sut.frame.size))
+        assert(snapshot: snapshot, named: "second_step_out_of_four")
     }
 
 }
