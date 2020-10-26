@@ -20,14 +20,21 @@ class ViewController: UIViewController {
         super.viewDidLoad()
         
         selectValue = self.sliderView?.index ?? 0
-        
+        sliderView?.labelColor = .label
+        sliderView?.labels = ["1", "2", "3", "4"]
     }
+    
     @IBOutlet weak var label: UILabel!
     @IBOutlet var sliderView:StepSlider!
     
     @IBAction func changeValue(sender:StepSlider) {
         selectValue = sender.index
     }
+    
+    @IBAction func stepSliderChangeValue(sender:CustomStepSlider) {
+        selectValue = Int(sender.step)
+    }
+
     @IBAction func changeIndex(sender: UIButton) {
         
     }

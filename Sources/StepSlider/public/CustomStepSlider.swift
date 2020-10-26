@@ -7,6 +7,7 @@
 
 import UIKit
 
+@IBDesignable
 public class CustomStepSlider: UIControl {
     private(set) lazy var slider: UISlider = {
         let slider = UISlider()
@@ -26,6 +27,7 @@ public class CustomStepSlider: UIControl {
         return slider
     }()
     
+    @IBInspectable
     public var maximumSteps: UInt {
         get { UInt(slider.maximumValue) + 1 }
         set {
@@ -34,6 +36,7 @@ public class CustomStepSlider: UIControl {
         }
     }
     
+    @IBInspectable
     public var step: UInt {
         get { UInt(round(slider.value)) }
         set {
@@ -88,7 +91,9 @@ public class CustomStepSlider: UIControl {
     }
     
     @objc private func sliderValueChanged() {
-        slider.value = Float(step)
+        if !slider.isTracking {
+            slider.setValue(Float(step), animated: true)
+        }
         updateTrackCircles()
         sendActions(for: .valueChanged)
     }
