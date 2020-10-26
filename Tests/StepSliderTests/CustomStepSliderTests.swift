@@ -16,7 +16,7 @@ class CustomStepSlider {
         }
     }
     var step: UInt {
-        get { UInt(slider.value) }
+        get { UInt(round(slider.value)) }
         set {
             slider.value = Float(newValue)
         }
@@ -83,5 +83,20 @@ class CustomStepSliderTests: XCTestCase {
         sut.slider.value = 2
         XCTAssertEqual(sut.step, 2, "current step")
     }
+    
+    func test_setSliderFraction_updatesStep() {
+        let sut = CustomStepSlider()
+        sut.maximumSteps = 4
+
+        sut.slider.value = 0.4
+        XCTAssertEqual(sut.step, 0, "current step")
+        
+        sut.slider.value = 1.5
+        XCTAssertEqual(sut.step, 2, "current step")
+        
+        sut.slider.value = 2.6
+        XCTAssertEqual(sut.step, 3, "current step")
+    }
+
 
 }
