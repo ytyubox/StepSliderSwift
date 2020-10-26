@@ -5,18 +5,26 @@ import PackageDescription
 
 let package = Package(
     name: "StepSliderSwift",
-    platforms: [.iOS(.v10)],
+    platforms: [.iOS(.v12), .macOS(.v10_13
+    )],
     products: [
+        .library(
+            name: "StepSliderCore",
+            targets: ["StepSliderCore"]),
         .library(
             name: "StepSlider",
             targets: ["StepSlider"]),
     ],
     targets: [
+        .target(name: "StepSliderCore"),
         .target(
             name: "StepSlider",
-            dependencies: []),
+            dependencies: ["StepSliderCore"]),
         .testTarget(
             name: "StepSliderTests",
             dependencies: ["StepSlider"]),
+        .testTarget(
+            name: "StepSliderCoreTests",
+            dependencies: ["StepSliderCore"])
     ]
 )
