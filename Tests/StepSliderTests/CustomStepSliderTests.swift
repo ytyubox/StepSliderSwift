@@ -15,7 +15,12 @@ class CustomStepSlider {
             slider.maximumValue = Float(newValue) - 1
         }
     }
-    let step = 0
+    var step: UInt {
+        get { UInt(slider.value) }
+        set {
+            slider.value = Float(newValue)
+        }
+    }
 }
 
 class CustomStepSliderTests: XCTestCase {
@@ -40,6 +45,19 @@ class CustomStepSliderTests: XCTestCase {
         XCTAssertEqual(sut.slider.value, 0, "slider value")
         XCTAssertEqual(sut.slider.minimumValue, 0, "slider min value")
         XCTAssertEqual(sut.slider.maximumValue, 4, "slider max value")
+    }
+    
+    func test_setStep_updatesUnderlyingSlider() {
+        let sut = CustomStepSlider()
+        
+        sut.maximumSteps = 4
+        sut.step = 2
+        
+        XCTAssertEqual(sut.maximumSteps, 4, "max steps")
+        XCTAssertEqual(sut.step, 2, "current steps")
+        XCTAssertEqual(sut.slider.value, 2, "slider value")
+        XCTAssertEqual(sut.slider.minimumValue, 0, "slider min value")
+        XCTAssertEqual(sut.slider.maximumValue, 3, "slider max value")
     }
 
 }
