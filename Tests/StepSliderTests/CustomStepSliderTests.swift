@@ -7,8 +7,13 @@
 
 import XCTest
 
-class CustomStepSlider {
-    let slider = UISlider()
+class CustomStepSlider: NSObject {
+    private(set) lazy var slider: UISlider = {
+        let slider = UISlider()
+        slider.addTarget(self, action: #selector(sliderValueChanged), for: .valueChanged)
+        return slider
+    }()
+    
     var maximumSteps: UInt {
         get { UInt(slider.maximumValue) + 1 }
         set {
@@ -20,6 +25,10 @@ class CustomStepSlider {
         set {
             slider.value = Float(newValue)
         }
+    }
+    
+    @objc private func sliderValueChanged() {
+        slider.value = Float(step)
     }
 }
 
@@ -89,14 +98,29 @@ class CustomStepSliderTests: XCTestCase {
         sut.maximumSteps = 4
 
         sut.slider.value = 0.4
+        sut.slider.simulate(.valueChanged)
         XCTAssertEqual(sut.step, 0, "current step")
-        
+        XCTAssertEqual(sut.slider.value, 0, "slider value")
+
         sut.slider.value = 1.5
+        sut.slider.simulate(.valueChanged)
         XCTAssertEqual(sut.step, 2, "current step")
-        
+        XCTAssertEqual(sut.slider.value, 2, "slider value")
+
         sut.slider.value = 2.6
+        sut.slider.simulate(.valueChanged)
         XCTAssertEqual(sut.step, 3, "current step")
+        XCTAssertEqual(sut.slider.value, 3, "slider value")
     }
 
+}
 
+private extension UIControl {
+    func simulate(_ event: UIControl.Event) {
+        allTargets.forEach { target in
+            actions(forTarget: target, forControlEvent: event)?.forEach {
+                (target as NSObject).perform(Selector($0))
+            }
+        }
+    }
 }
