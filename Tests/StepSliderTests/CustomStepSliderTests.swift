@@ -59,5 +59,18 @@ class CustomStepSliderTests: XCTestCase {
         XCTAssertEqual(sut.slider.minimumValue, 0, "slider min value")
         XCTAssertEqual(sut.slider.maximumValue, 3, "slider max value")
     }
+    
+    func test_setStepOverMaximum_updatesUnderlyingSlider() {
+        let sut = CustomStepSlider()
+        
+        sut.maximumSteps = 4
+        sut.step = 4
+        
+        XCTAssertEqual(sut.maximumSteps, 4, "max steps")
+        XCTAssertEqual(sut.step, 3, "current steps")
+        XCTAssertEqual(sut.slider.value, 3, "slider value")
+        XCTAssertEqual(sut.slider.minimumValue, 0, "slider min value")
+        XCTAssertEqual(sut.slider.maximumValue, 3, "slider max value")
+    }
 
 }
