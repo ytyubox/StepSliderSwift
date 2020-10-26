@@ -11,6 +11,7 @@
 		084781F5254593C00059801F /* XCTestCase+Snapshot.swift in Sources */ = {isa = PBXBuildFile; fileRef = 084781F3254593C00059801F /* XCTestCase+Snapshot.swift */; };
 		084781F6254593C00059801F /* UIView+Snapshot.swift in Sources */ = {isa = PBXBuildFile; fileRef = 084781F4254593C00059801F /* UIView+Snapshot.swift */; };
 		084781FE254593E00059801F /* SnapshotWindow.swift in Sources */ = {isa = PBXBuildFile; fileRef = 084781FD254593E00059801F /* SnapshotWindow.swift */; };
+		08BB46A82546DD7F002750F5 /* CustomStepSliderTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08BB46A72546DD7F002750F5 /* CustomStepSliderTests.swift */; };
 		08D1C8D62545910D0090DABE /* stepSliderInternalTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08D1C8C9254590DF0090DABE /* stepSliderInternalTests.swift */; };
 		08D1C8DB254591110090DABE /* StepSliderTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08D1C8CA254590DF0090DABE /* StepSliderTests.swift */; };
 		08D1C8E8254591650090DABE /* StepSlider+internal.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08D1C8E5254591650090DABE /* StepSlider+internal.swift */; };
@@ -33,6 +34,7 @@
 		084781F3254593C00059801F /* XCTestCase+Snapshot.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "XCTestCase+Snapshot.swift"; sourceTree = "<group>"; };
 		084781F4254593C00059801F /* UIView+Snapshot.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UIView+Snapshot.swift"; sourceTree = "<group>"; };
 		084781FD254593E00059801F /* SnapshotWindow.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SnapshotWindow.swift; sourceTree = "<group>"; };
+		08BB46A72546DD7F002750F5 /* CustomStepSliderTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomStepSliderTests.swift; sourceTree = "<group>"; };
 		08D1C8C9254590DF0090DABE /* stepSliderInternalTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = stepSliderInternalTests.swift; sourceTree = "<group>"; };
 		08D1C8CA254590DF0090DABE /* StepSliderTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = StepSliderTests.swift; sourceTree = "<group>"; };
 		08D1C8CB254590DF0090DABE /* Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
@@ -103,6 +105,7 @@
 			children = (
 				08D1C8C9254590DF0090DABE /* stepSliderInternalTests.swift */,
 				08D1C8CA254590DF0090DABE /* StepSliderTests.swift */,
+				08BB46A72546DD7F002750F5 /* CustomStepSliderTests.swift */,
 			);
 			path = StepSliderTests;
 			sourceTree = "<group>";
@@ -262,6 +265,7 @@
 				084781F6254593C00059801F /* UIView+Snapshot.swift in Sources */,
 				08D1C8D62545910D0090DABE /* stepSliderInternalTests.swift in Sources */,
 				084781FE254593E00059801F /* SnapshotWindow.swift in Sources */,
+				08BB46A82546DD7F002750F5 /* CustomStepSliderTests.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
