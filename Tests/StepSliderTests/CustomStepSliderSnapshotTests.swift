@@ -77,7 +77,10 @@ class CustomStepSlider: UIControl {
     }
     
     private func updateTrackCircles() {
-        _trackCirclesArray.enumerated().forEach { index, circle in
+        let direction = UIView.userInterfaceLayoutDirection(for: semanticContentAttribute)
+        let circles = direction == .rightToLeft ? _trackCirclesArray.reversed() : _trackCirclesArray
+        
+        circles.enumerated().forEach { index, circle in
             circle.fillColor = (index > step) ?
                 slider.maximumTrackTintColor?.cgColor :
                 slider.minimumTrackTintColor?.cgColor
@@ -110,6 +113,17 @@ class CustomStepSliderSnapshotTests: XCTestCase {
         
         let snapshot = sut.snapshot(for: .init(size: sut.frame.size))
         assert(snapshot: snapshot, named: "second_step_out_of_four")
+    }
+    
+    func test_fourthStep_outOfFive_rightToLeft() {
+        let sut = CustomStepSlider(frame: CGRect(x: 0, y: 0, width: 200, height: 100))
+        sut.semanticContentAttribute = .forceRightToLeft
+        sut.maximumSteps = 5
+        sut.step = 3
+        sut.backgroundColor = .systemBackground
+        
+        let snapshot = sut.snapshot(for: .init(size: sut.frame.size, traitCollection: .init(layoutDirection: .rightToLeft)))
+        assert(snapshot: snapshot, named: "fourth_step_out_of_five")
     }
 
 }
