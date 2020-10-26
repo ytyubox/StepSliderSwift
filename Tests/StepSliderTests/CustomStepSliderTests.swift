@@ -7,7 +7,7 @@
 
 import XCTest
 
-class CustomStepSlider: NSObject {
+class CustomStepSlider: UIControl {
     private(set) lazy var slider: UISlider = {
         let slider = UISlider()
         slider.addTarget(self, action: #selector(sliderValueChanged), for: .valueChanged)
@@ -29,6 +29,7 @@ class CustomStepSlider: NSObject {
     
     @objc private func sliderValueChanged() {
         slider.value = Float(step)
+        sendActions(for: .valueChanged)
     }
 }
 
@@ -111,6 +112,18 @@ class CustomStepSliderTests: XCTestCase {
         sut.slider.simulate(.valueChanged)
         XCTAssertEqual(sut.step, 3, "current step")
         XCTAssertEqual(sut.slider.value, 3, "slider value")
+    }
+    
+    func test_setSliderValue_sendValueChangeEvents() {
+        var eventCount = 0
+        let sut = CustomStepSlider()
+        sut.addAction(UIAction { _ in eventCount += 1 }, for: .valueChanged)
+
+        sut.slider.simulate(.valueChanged)
+        XCTAssertEqual(eventCount, 1)
+
+        sut.slider.simulate(.valueChanged)
+        XCTAssertEqual(eventCount, 2)
     }
 
 }
