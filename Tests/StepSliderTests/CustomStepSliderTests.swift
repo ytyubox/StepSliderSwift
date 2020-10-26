@@ -7,32 +7,6 @@
 
 import XCTest
 
-class CustomStepSlider: UIControl {
-    private(set) lazy var slider: UISlider = {
-        let slider = UISlider()
-        slider.addTarget(self, action: #selector(sliderValueChanged), for: .valueChanged)
-        return slider
-    }()
-    
-    var maximumSteps: UInt {
-        get { UInt(slider.maximumValue) + 1 }
-        set {
-            slider.maximumValue = Float(newValue) - 1
-        }
-    }
-    var step: UInt {
-        get { UInt(round(slider.value)) }
-        set {
-            slider.value = Float(newValue)
-        }
-    }
-    
-    @objc private func sliderValueChanged() {
-        slider.value = Float(step)
-        sendActions(for: .valueChanged)
-    }
-}
-
 class CustomStepSliderTests: XCTestCase {
 
     func test_defaultValues() {
