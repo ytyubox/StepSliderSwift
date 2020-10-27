@@ -1,11 +1,11 @@
-// swift-tools-version:5.0
+// swift-tools-version:5.3
 // The swift-tools-version declares the minimum version of Swift required to build this package.
 
 import PackageDescription
 
 let package = Package(
     name: "StepSliderSwift",
-    platforms: [.iOS(.v10)],
+    platforms: [.iOS(SupportedPlatform.IOSVersion.v14)],
     products: [
         .library(
             name: "StepSlider",
@@ -17,6 +17,7 @@ let package = Package(
             dependencies: []),
         .testTarget(
             name: "StepSliderTests",
-            dependencies: ["StepSlider"]),
+            dependencies: ["StepSlider"],
+            exclude:["snapshots"]),
     ]
 )

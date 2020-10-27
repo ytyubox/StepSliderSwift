@@ -60,6 +60,7 @@
                         </constraints>
                     </view>
                     <connections>
+                        <outlet property="customStepSlider" destination="eXz-vw-tSc" id="6tJ-mt-xqQ"/>
                         <outlet property="label" destination="I9q-mh-WmQ" id="1jS-7j-bza"/>
                         <outlet property="sliderView" destination="T4t-4b-Y7Y" id="EcH-5h-qpT"/>
                     </connections>

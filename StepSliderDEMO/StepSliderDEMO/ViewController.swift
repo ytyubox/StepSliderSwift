@@ -26,6 +26,7 @@ class ViewController: UIViewController {
     
     @IBOutlet weak var label: UILabel!
     @IBOutlet var sliderView:StepSlider!
+    @IBOutlet weak var customStepSlider: CustomStepSlider!
     
     @IBAction func changeValue(sender:StepSlider) {
         selectValue = sender.index
