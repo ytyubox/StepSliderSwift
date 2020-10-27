@@ -39,5 +39,13 @@ class CustomStepSliderSnapshotTests: XCTestCase {
         let snapshot = sut.snapshot(for: .init(size: sut.frame.size, traitCollection: .init(layoutDirection: .rightToLeft)))
         assert(snapshot: snapshot, named: "fourth_step_out_of_five")
     }
-
+    func test_secondStep_OutOfTen() {
+        let sut = CustomStepSlider(frame: CGRect(x: 0, y: 0, width: 200, height: 100))
+        sut.maximumSteps = 10
+        sut.step = 1
+        sut.backgroundColor = .systemBackground
+        
+        let snapshot = sut.snapshot(for: .init(size: sut.frame.size))
+        record(snapshot: snapshot, named: "second_step_out_of_ten")
+    }
 }
